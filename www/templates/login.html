@@ -1,0 +1,33 @@
+﻿<ion-view view-title="login">
+  <ion-content class="login_bg" scroll="false">
+    <img class="login_logo" src="img/logo.png" />
+    <label class="item item-input layout_space">
+      <i class="icon icon_username placeholder-icon"></i>
+      <input type="text"
+         placeholder="用户名"
+         maxlength="15"
+         ng-model="loginData.username">
+    </label>
+    <div style="height:1px;color:#808080"></div>
+    <label class="item item-input">
+      <i class="icon icon_pswd placeholder-icon"></i>
+      <input class="input_pswd"
+         ng-model="loginData.password"
+         type="password"
+         placeholder="密码"
+         maxlength="15">
+    </label>
+
+    <button class="button button-block button-stable btn_login"
+      ng-click="doLogin()">
+      {{loginText}}
+      <ion-spinner
+        style="position: absolute;top: 8px"
+        ng-show="loading"
+        icon="dots"
+        class="spinner-dark">
+      </ion-spinner>
+    </button>
+
+  </ion-content>
+</ion-view>

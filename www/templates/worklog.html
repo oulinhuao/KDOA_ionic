@@ -1,0 +1,24 @@
+﻿<ion-view >
+
+    <ion-header-bar align-title="center" class="bar-positive bar bar-header disable-user-behavior">
+
+        <button class=" button buttons button-icon ion-arrow-left-c header-item" ng-click="goMain()"></button>
+        <h1 class="title">工作日志</h1>
+        <i class="btn_log_menu"></i>
+    </ion-header-bar>
+
+    <ion-tabs class="tabs-striped tabs-top tabs-icon-left" >
+
+        <ion-tab title="我的日志" icon-off="ion-mine-log" icon-on="ion-mine-log" href="#/worklog/list">
+            <ion-nav-view name="worklog-list"></ion-nav-view>
+        </ion-tab>
+
+        <ion-tab title="日志分析" icon-off="ion-mine-log-analysis" icon-on="ion-mine-log-analysis">
+            <ion-nav-view name="tab-chats"></ion-nav-view>
+        </ion-tab>
+
+    </ion-tabs>
+
+
+
+</ion-view>

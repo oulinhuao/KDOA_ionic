@@ -1,0 +1,182 @@
+﻿/* Empty. Add your own CSS if you like */
+
+.bar.bar-stable {
+    background-color: #207dba;
+}
+
+.bar.bar-stable .title {
+     color: #fff;
+}
+
+/**/
+.bar-stable .button.button-clear {
+     color: #fff;
+}
+
+/*通用*/
+.btn_back{
+    margin-left:5px;
+}
+
+
+/**/
+
+.bar{
+    padding: 0;
+    height: 50px;
+}
+.has-header {
+    top: 50px;
+}
+.header-margin {
+    margin-top: 50px;
+}
+
+.bar .title {
+    font-size: 22px;
+    line-height: 50px;
+}
+
+.btn_mine:before {
+    position:absolute;
+    right:-8px;
+    top:-3px;
+    content: url(../img/head_people.png);
+}
+.bar.bar-positive {
+    background-color: #207dba;
+}
+
+.setBG{
+    background-image: url(../img/oa_home_page_bg.jpg);
+	background-size: cover;
+}
+
+
+/**主界面*/
+.table_menu{
+	width: 100%;
+	height: auto;
+}
+.menu_row{
+	width: 100%;
+	height: auto;
+}
+
+.menu_item1,.menu_item2{
+	padding-top: 5px;
+	width: 50%;
+	height: auto;
+}
+
+.menu_item1{
+	padding-left: 0px;
+	padding-right: 5px;
+}
+
+.menu_item2{
+	padding-left: 5px;
+	padding-right: 0px;
+}
+
+.layout_item img{
+	width: 100%;
+}
+
+.menu_item_text{
+	width: min-intrinsic;
+	font: "微软雅黑";
+	display: block;
+	text-align: center;
+	margin-top: -20%;
+	font-weight:bold;
+	font-size: 4vw;
+	color: #fff;
+}
+/*主界面菜单*/
+.set_menu_BG{
+    background-color:#2d313c;
+}
+
+
+/**工作日志*/
+
+.btn_log_menu:before{
+    position:absolute;
+    right:0;
+    padding:2px;
+    content: url(../img/icon_right_add.png);
+    margin-top:8px;
+    margin-right:4px;
+}
+
+
+.menu-header{
+    text-align:center;
+    color:white;
+    font-size:22px;
+    margin-top:10px;
+}
+
+
+.tabs-striped.tabs-positive .tabs {
+    background-color: #fff;
+    color:black;
+}
+
+.tab-item {
+    width:50%;
+    max-width:100%;
+}
+
+.tabs-icon-left.tabs .tab-item, .tabs-icon-left > .tabs .tab-item, .tabs-icon-right.tabs .tab-item, .tabs-icon-right > .tabs .tab-item {
+    font-size: 18px;
+}
+
+.ion-mine-log{
+    content: url(../img/icon_write.png);
+    position:relative;
+    top:10px;
+}
+.ion-mine-log-analysis{
+    content: url(../img/icon_chart.png);
+    position:relative;
+    top:10px;
+}
+
+.item{
+  padding: 10px;
+}
+.hour-layout{
+  float: right;
+  margin-left: 10px;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.ProjName{
+  color: #000;
+  font-size: 18px;
+}
+.ProjType{
+  color: #000;
+  font-size: 14px;
+  display: block;
+  margin-top: 3px;
+}
+
+.hour-value{
+  color: #fe7400;
+  font-size: 20px;
+}
+.hour-text{
+  color: #000;
+  font-size: 14px;
+}
+.work-date{
+  display: block;
+  color: #000;
+  font-size: 14px;
+}
+
+

@@ -1,0 +1,69 @@
+﻿.login_bg {
+    height: 100%;
+	background-image: url(../img/login_bg.jpg);
+	background-size: cover;
+    text-align:center;
+    padding:10%;
+}
+
+.login_logo {
+    height:auto;
+    width:90%;
+    margin-top:10%;
+}
+
+.layout_space {
+    margin-top:10%;
+}
+
+.icon_username:before {
+    content:url(../img/icon_people.png);
+}
+.icon_pswd:before {
+    content:url(../img/icon_password.png);
+}
+
+.btn_login {
+  color:#0094ff;
+  position: relative;
+}
+
+
+.button{
+  line-height: 0;
+}
+.button:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: ' ';
+}
+
+.layout_checkbox{
+	margin-top: 4%;
+}
+
+.layout_checkbox span{
+	display: inline-block;
+    vertical-align: top;
+    margin-top: 3px;// 位置处理
+}
+
+.myckb_autoKeepPwd{
+    float:left;
+    left:0;
+}
+.myckb_autoLogin{
+    float:right;
+    right:0;
+}
+
+
+input{
+    font-size:20px;
+}
+
+
+

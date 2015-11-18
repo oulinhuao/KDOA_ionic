@@ -1,0 +1,66 @@
+﻿<ion-view>
+    <ion-content  scroll="false">
+        <ion-side-menus >
+            <ion-side-menu-content class="setBG">
+
+                <ion-header-bar align-title="center" class="bar-positive" ng-controller="ToggleCtrl">
+                    <h1 class="title">今点移动办公</h1>
+                    <button class=" btn_mine button buttons button-icon header-item" ng-click="toggleRight()"></button>
+                </ion-header-bar>
+
+                <div style="padding:8px;" class="has-header header-margin">
+
+                    <img src="img/oa_pic.jpg" style="width: 100%;" />
+
+                    <table class="table_menu">
+                        <tr class="menu_row">
+                            <td class="menu_item1" ng-click="goWorkLog()">
+                                <a class="layout_item">
+                                    <img src="img/icon_worklog.jpg" />
+                                    <span class="menu_item_text">工作日志</span>
+                                </a>
+                            </td>
+                            <td class="menu_item2">
+                                <a class="layout_item">
+                                    <img src="img/icon_resources.jpg" />
+                                    <span class="menu_item_text">信息资源</span>
+                                </a>
+                            </td>
+                        </tr>
+
+                        <tr class="menu_row">
+                            <td class="menu_item1">
+                                <a class="layout_item">
+                                    <img src="img/icon_contacts.jpg" />
+                                    <span class="menu_item_text">通讯录</span>
+                                </a>
+                            </td>
+                            <td class="menu_item2">
+                                <a class="layout_item">
+                                    <img src="img/icon_communicate.jpg" />
+                                    <span class="menu_item_text">内部交流</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </ion-side-menu-content>
+
+            <!-- 右侧菜单 -->
+            <ion-side-menu side="right" name="menuContent">
+                <ion-view class="set_menu_BG">
+                    <ion-content scroll="false">
+
+                        <div class="menu-header">
+                            <img src="img/head.png" />
+                            <p style="margin-top:10px">lhou</p>
+                            <p>上海公司</p>
+                        </div>
+
+
+                    </ion-content>
+                </ion-view>
+            </ion-side-menu>
+        </ion-side-menus>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,32 @@
+﻿<ion-view >
+    <ion-content scroll="true" style="margin-top:40px">
+        <ion-refresher pulling-icon="ion-loading-c" pulling-text="下拉刷新"
+                       refreshing-text="刷新成功" refreshing-icon="ion-loading-c"
+                       on-refresh="datalist.doRefresh()">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item class="item-remove-animate" ng-repeat="worklog in datalist.list" type="item-text-wrap" ">
+                <div class="hour-layout">
+                  <a class="hour-value">{{worklog.WorkHour}}</a>
+                  <a class="hour-text">小时</a>
+                  <a class="work-date">{{worklog.WorkDate}}</a>
+                </div>
+                <div>
+                  <a class="ProjName">{{worklog.ProjName}}</a>
+                  <a class="ProjType">{{worklog.WorkTypeName}}</a>
+                </div>
+            </ion-item>
+        </ion-list>
+
+      <ion-infinite-scroll
+        ng-if="datalist.currentCount != 0 && datalist.currentCount <= datalist.allCount"
+        on-infinite="datalist.doLoadMore()"
+        distance="1%"
+        icon="ion-load-a" immediate-check="false">
+
+      </ion-infinite-scroll>
+    </ion-content>
+</ion-view>
+
+
