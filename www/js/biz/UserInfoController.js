@@ -9,10 +9,11 @@ angular.module('starter.UserInfoController', ['ionic',
     '$cordovaToast',
     'GlobalSetting',
     function ($scope, $state, UserInfoService, $cordovaToast,GlobalSetting) {
-      $scope.loginData = {};
+      $scope.loginData = {username:'lhou',password:'ou852723'};
       $scope.loading = false;
       $scope.loginText = "登录";
-
+      //$scope.loginData.username = 'lhou';
+      //$scope.loginData.password = 'ou852723';
 
       // 登录操作
       $scope.doLogin = function () {
@@ -48,7 +49,7 @@ angular.module('starter.UserInfoController', ['ionic',
               if(info.ServerId > 0){
                 GlobalSetting.setUserId(info.ServerId);
                 GlobalSetting.setUserToken(info.Token);
-                UserInfoService.insertOrUpdate(info);
+                //UserInfoService.insertOrUpdate(info);
 
                 $scope.goMain();
                 $scope.loading = false;
@@ -82,4 +83,5 @@ angular.module('starter.UserInfoController', ['ionic',
       $scope.gotoDetail = function () {
         $state.go('userPwdModify', {userId: '1'});
       };
-  }]);
+
+    }]);

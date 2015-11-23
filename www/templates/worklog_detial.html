@@ -1,0 +1,54 @@
+﻿<ion-view >
+
+    <ion-header-bar align-title="center" class="bar-positive bar bar-header disable-user-behavior">
+
+        <button class=" button buttons button-icon ion-arrow-left-c header-item" ng-click="goWorklog()"></button>
+        <h1 class="title">日志详情</h1>
+        <i class="btn_log_menu"></i>
+    </ion-header-bar>
+
+    <ion-content scroll="true" style=" background-color: #d9d9d9;">
+
+      <div style="margin: 10px;">
+        <div class="info-item">
+          <a class="info-value">{{mEntity.CompName}}</a>
+          <a class="info-type">部门名称</a>
+        </div>
+        <div class="info-item">
+          <a class="info-value">{{mEntity.ProjName}}</a>
+          <a class="info-type">项目名称</a>
+        </div>
+        <div class="info-item">
+          <a class="info-value">{{mEntity.WorkTypeName}}</a>
+          <a class="info-type">工作类型</a>
+        </div>
+        <div class="info-item">
+          <a class="info-value">{{mEntity.UserRealName}}</a>
+          <a class="info-type">用户名称</a>
+        </div>
+        <div class="info-item">
+          <a class="info-value">{{mEntity.WorkDate}}</a>
+          <a class="info-type">工作日期</a>
+        </div>
+        <div class="info-item">
+          <a class="info-value">{{mEntity.WorkHour}}</a>
+          <a class="info-type">工作时长(小时)</a>
+        </div>
+        <div class="info-item">
+          <a class="info-value">{{mEntity.CreateDate.substr(0,9)}}</a>
+          <a class="info-type">登记日期</a>
+        </div>
+
+        <a class="info-content-type">工作内容</a>
+        <div class="info-content">
+          {{mEntity.WorkContent}}
+        </div>
+
+
+      </div>
+
+    </ion-content>
+
+
+
+</ion-view>

@@ -6,13 +6,16 @@
         </ion-refresher>
 
         <ion-list>
-            <ion-item class="item-remove-animate" ng-repeat="worklog in datalist.list" type="item-text-wrap" ">
+            <ion-item class="item-remove-animate"
+                      ng-repeat="worklog in datalist.list"
+                      type="item-text-wrap"
+                      ng-click="goDetial(worklog)">
                 <div class="hour-layout">
                   <a class="hour-value">{{worklog.WorkHour}}</a>
                   <a class="hour-text">小时</a>
                   <a class="work-date">{{worklog.WorkDate}}</a>
                 </div>
-                <div>
+                <div style="overflow-x: hidden; text-overflow: ellipsis;">
                   <a class="ProjName">{{worklog.ProjName}}</a>
                   <a class="ProjType">{{worklog.WorkTypeName}}</a>
                 </div>

@@ -14,6 +14,7 @@ angular.module('starter', ['ionic', 'ngCordova',
     'starter.services',
     'starter.databaseservice',
     'starter.globalservice',
+    'starter.MainController',
     'starter.UserInfoController',
     'starter.UserInfoService',
     'starter.WorklogController',
@@ -38,10 +39,11 @@ angular.module('starter', ['ionic', 'ngCordova',
     '$cordovaToast', '$cordovaKeyboard',
     'GlobalSetting',
     'DBHelper',
+    '$cordovaFile',
     function ($ionicPlatform, $rootScope, $location,
               $timeout, $ionicHistory,
               $cordovaToast, $cordovaKeyboard,
-              GlobalSetting,DBHelper) {
+              GlobalSetting,DBHelper,$cordovaFile) {
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -57,7 +59,9 @@ angular.module('starter', ['ionic', 'ngCordova',
         GlobalSetting.initSetting();
         // set device's external pa
         if (ionic.Platform.isAndroid()) { // android设备
-          GlobalSetting.setLocalPath(cordova.file.externalRootDirectory);
+          if("undefined" != typeof(cordova)){
+            GlobalSetting.setLocalPath(cordova.file.externalRootDirectory);
+          }
           // 注册back键事件
           $ionicPlatform.registerBackButtonAction(function (e) {
             e.preventDefault();
@@ -94,11 +98,11 @@ angular.module('starter', ['ionic', 'ngCordova',
           //GlobalSetting.setLocalPath(cordova.file.dataDirectory);
         }
 
-        // init database object
-        db = DBHelper.opendb();
-        //DBHelper.dropTable();
-        // create table
-        DBHelper.createTable();
+        //// init database object
+        //db = DBHelper.opendb();
+        ////DBHelper.dropTable();
+        //// create table
+        //DBHelper.createTable();
 
       });
     }
@@ -138,8 +142,6 @@ angular.module('starter', ['ionic', 'ngCordova',
           }
         })
 
-
-
         .state('worklog', {
           url: '/worklog',
           templateUrl: 'templates/worklog.html',
@@ -156,59 +158,26 @@ angular.module('starter', ['ionic', 'ngCordova',
             }
           }
         })
-
-        // Each tab has its own nav history stack:
-
-        /*
-         .state('tab.login', {
-         url: '/login',
-         views: {
-         'login': {
-         templateUrl: 'templates/login.html',
-         controller: 'DashCtrl'
-         }
-         }
-         })
-         */
-
-        .state('tab.dash', {
-          url: '/dash',
+        .state('worklog.analysis', {
+          url: '/analysis',
           views: {
-            'tab-dash': {
-              templateUrl: 'templates/tab-dash.html',
-              controller: 'DashCtrl'
+            'worklog-analysis':{
+              templateUrl: 'templates/worklog_analysis.html',
+              controller: 'WorklogListCtrl'
             }
           }
         })
 
-        .state('tab.chats', {
-          url: '/chats',
-          views: {
-            'tab-chats': {
-              templateUrl: 'templates/tab-chats.html',
-              controller: 'ChatsCtrl'
-            }
-          }
-        })
-        .state('tab.chat-detail', {
-          url: '/chats/:chatId',
-          views: {
-            'tab-chats': {
-              templateUrl: 'templates/chat-detail.html',
-              controller: 'ChatDetailCtrl'
-            }
-          }
+        .state('worklogdetial', {
+          url: '/detial',
+          params: {
+            'projEntity': null
+          },
+          templateUrl: 'templates/worklog_detial.html',
+          controller: 'WorklogCtrl'
         })
 
-        .state('tab.account', {
-          url: '/account',
-          views: {
-            'tab-account': {
-              templateUrl: 'templates/tab-account.html',
-              controller: 'AccountCtrl'
-            }
-          }
-        });
+
 
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/login');

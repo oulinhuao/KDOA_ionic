@@ -1,43 +1,10 @@
 angular.module('starter.controllers', [])
 
-
-.controller('MainCtrl', function ($scope, $state) {
-    $scope.goWorkLog = function () {
-        $state.go('worklog');
-    };
-    $scope.goInfo = function () {
-        $state.go('main');
-    };
-    $scope.goContactsg = function () {
-        $state.go('main');
-    };
-    $scope.goIM = function () {
-        $state.go('main');
-    }
-
-
-})
-
 .controller('ToggleCtrl', function ($scope, $ionicSideMenuDelegate) {
-    $scope.toggleRight = function () {
+    $scope.toggleRightMemu = function () {
         $ionicSideMenuDelegate.toggleRight();
     };
 })
-
-.controller('MainRightMenuCtrl', function ($scope, $ionicSideMenuDelegate) {
-    $scope.toggleRight = function () {
-        $ionicSideMenuDelegate.toggleRight();
-    };
-})
-
-
-
-
-
-
-
-
-
 
 
 .controller('DashCtrl', function($scope) {})

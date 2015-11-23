@@ -153,4 +153,8 @@
     $scope.goMain = function () {
       $state.go('main');
     };
+
+    $scope.goDetial = function(pEntity){
+      $state.go('worklogdetial',{projEntity:pEntity});
+    }
 }])

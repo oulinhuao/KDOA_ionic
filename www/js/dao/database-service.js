@@ -21,7 +21,7 @@ angular.module('starter.databaseservice', ['ngCordova'])
 				},
 				createTable: function() {
 					// USER_INFO:用户信息表
-					$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS 'USER_INFO' (" + //
+          var sql = "CREATE TABLE IF NOT EXISTS 'USER_INFO' (" + //
             "'LOCAL_ID' INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: LocalId 本地Id
             "'SERVER_ID' INTEGER NOT NULL ," + // 1: ServerId 服务端Id
             "'USER_NAME' TEXT," + // 2: UserName 用户名
@@ -40,7 +40,8 @@ angular.module('starter.databaseservice', ['ngCordova'])
             "'MOBILE_PHONE' TEXT," + // 15: MobilePhone 手机
             "'TEL' TEXT," + // 16: Tel 电话
             "'UPDATE_TIME' INTEGER NOT NULL ," + // 17: UpdateTime 更新时间
-            "'TOKEN' TEXT);") // 18: Token Token
+            "'TOKEN' TEXT);";// 18: Token Token
+					$cordovaSQLite.execute(db,sql );
 				},
 				dropTable: function() {
 
