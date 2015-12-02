@@ -1,0 +1,48 @@
+﻿<ion-view >
+
+  <ion-header-bar align-title="center" class="bar-positive bar bar-header disable-user-behavior">
+
+    <button class=" button buttons button-icon ion-arrow-left-c header-item" ng-click="goWorklog()"></button>
+    <h1 class="title">日志修改</h1>
+    <i class="btn_log_menu"></i>
+  </ion-header-bar>
+
+  <ion-content scroll="true" style=" background-color: #d9d9d9;">
+
+    <div style="margin: 10px;">
+      <div class="info-item">
+        <a class="info-value">{{mEntity.CompName}}</a>
+        <a class="info-type">部门名称</a>
+      </div>
+      <div class="info-item">
+        <a class="info-value">{{mEntity.ProjName}}</a>
+        <a class="info-type">项目名称</a>
+      </div>
+      <div class="info-item">
+        <a class="info-value">{{mEntity.WorkTypeName}}</a>
+        <a class="info-type">工作类型</a>
+      </div>
+      <div class="info-item">
+        <a class="info-value">{{mEntity.WorkDate}}</a>
+        <a class="info-type">工作日期</a>
+      </div>
+      <div class="info-item">
+        <input style="font-size: 18px;width: 30%"
+               type="text" class="info-value" ng-model="mEntity.WorkHour"> </input>
+        <a class="info-type">工作时长(小时)</a>
+      </div>
+
+      <a class="info-content-type">工作内容</a>
+      <textarea class="info-content"
+              style="text-align: start;width: 100%;line-height: 1.2;font-size: 18px;"
+              ng-model="mEntity.WorkContent">
+      </textarea>
+
+
+    </div>
+
+  </ion-content>
+
+
+
+</ion-view>
