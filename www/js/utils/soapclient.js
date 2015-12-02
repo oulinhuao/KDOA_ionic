@@ -128,7 +128,6 @@ SOAPClient_cacheWsdl = new Array();
 SOAPClient._loadWsdl = function(url, method, parameters, async, callback)
 {
 	// load from cache?
-	
 	var wsdl = SOAPClient_cacheWsdl[url];
 	if(wsdl + "" != "" && wsdl + "" != "undefined")
 		return SOAPClient._sendSoapRequest(url, method, parameters, async, callback, wsdl);
@@ -149,7 +148,6 @@ SOAPClient._loadWsdl = function(url, method, parameters, async, callback)
 }
 SOAPClient._onLoadWsdl = function(url, method, parameters, async, callback, req)
 {
-	
 	var wsdl = req.responseXML;
 	SOAPClient_cacheWsdl[url] = wsdl;	// save a copy in cache
 	return SOAPClient._sendSoapRequest(url, method, parameters, async, callback, wsdl);

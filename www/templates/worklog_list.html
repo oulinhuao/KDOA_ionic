@@ -5,10 +5,9 @@
                        on-refresh="datalist.doRefresh()">
         </ion-refresher>
 
-        <ion-list>
-            <ion-item class="item-remove-animate"
+        <ion-list >
+            <ion-item style="padding: 0;"
                       ng-repeat="worklog in datalist.list"
-                      type="item-text-wrap"
                       ng-click="goDetial(worklog)">
                 <div class="hour-layout">
                   <a class="hour-value">{{worklog.WorkHour}}</a>
@@ -19,6 +18,19 @@
                   <a class="ProjName">{{worklog.ProjName}}</a>
                   <a class="ProjType">{{worklog.WorkTypeName}}</a>
                 </div>
+              <ion-option-button
+                class="button-balanced my-option-size"
+                ng-click="datalist.doEdit($index,worklog)">
+                修改
+              </ion-option-button>
+              <ion-option-button
+                class="button-balanced my-option-size"
+                ng-click="datalist.doDelete($index)">
+                删除
+              </ion-option-button>
+
+
+
             </ion-item>
         </ion-list>
 
@@ -27,6 +39,7 @@
         on-infinite="datalist.doLoadMore()"
         distance="1%"
         icon="ion-load-a" immediate-check="false">
+
 
       </ion-infinite-scroll>
     </ion-content>

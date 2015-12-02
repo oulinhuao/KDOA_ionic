@@ -1,25 +1,26 @@
 // Ionic Starter App
 
-// database handle
-var db = null;
+
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova',
-    'common.dateutils',
-    'starter.controllers',
-    'starter.services',
-    'starter.databaseservice',
-    'starter.globalservice',
-    'starter.MainController',
-    'starter.UserInfoController',
-    'starter.UserInfoService',
-    'starter.WorklogController',
-    'starter.workloglistcontroller'
 
+// database handle
+//var db = null;
+
+angular.module('starter', ['ionic', 'ngCordova',
+  'starter.controllers',
+  'starter.services',
+  'starter.databaseservice',
+  'starter.globalservice',
+  'starter.MainController',
+  'starter.UserInfoController',
+  'starter.UserInfoService',
+  'starter.WorklogController',
+  'starter.workloglistcontroller'
   ])
 
 
@@ -97,7 +98,6 @@ angular.module('starter', ['ionic', 'ngCordova',
         } else if (ionic.Platform.isIOS()) { // ios设备
           //GlobalSetting.setLocalPath(cordova.file.dataDirectory);
         }
-
         //// init database object
         //db = DBHelper.opendb();
         ////DBHelper.dropTable();
@@ -174,6 +174,15 @@ angular.module('starter', ['ionic', 'ngCordova',
             'projEntity': null
           },
           templateUrl: 'templates/worklog_detial.html',
+          controller: 'WorklogCtrl'
+        })
+
+        .state('worklogdetial_edit', {
+          url: '/detial_edit',
+          params: {
+            'projEntity': null
+          },
+          templateUrl: 'templates/worklog_detial_edit.html',
           controller: 'WorklogCtrl'
         })
 

@@ -1,4 +1,4 @@
-angular.module('starter.UserInfoController', ['ionic',
+angular.module('starter.UserInfoController', [
   'ngCordova',
   'starter.globalservice',
   'starter.UserInfoService'])
@@ -22,7 +22,7 @@ angular.module('starter.UserInfoController', ['ionic',
           var pwd = $scope.loginData.password;
           // 必须输入验证
           if (typeof(name) == "undefined" || name.length == 0) {
-            $cordovaToast.show('用户名必须输入!', 'short', 'center');
+            $cordovaToast.showShortCenter('用户名必须输入!');
             return false;
           }
 
@@ -33,17 +33,17 @@ angular.module('starter.UserInfoController', ['ionic',
           //}
 
           if (typeof(pwd) == "undefined" || pwd.length == 0) {
-            $cordovaToast.show('密码必须输入!', 'short', 'center');
+            $cordovaToast.showShortCenter('密码必须输入!');
             return false;
           }
 
           $scope.loading = true;
           $scope.loginText = "登录中";
-          //var md5Pwd = hex_md5(pwd).toUpperCase();
+
           UserInfoService.doLogin(name, pwd).
           then(function (response) {
             if (response == '-1' || response == '' || response == 'undefined' || response == null) {
-              $cordovaToast.show('用户名或密码错误!', 'short', 'center');
+              $cordovaToast.showShortCenter('用户名或密码错误!');
             } else {
               var info = JSON.parse(response);
               if(info.ServerId > 0){
@@ -51,14 +51,12 @@ angular.module('starter.UserInfoController', ['ionic',
                 GlobalSetting.setUserToken(info.Token);
                 //UserInfoService.insertOrUpdate(info);
 
-                $scope.goMain();
-                $scope.loading = false;
-                $scope.loginText = "登录";
+                $scope.loginSuccess();
               }else{
                 // 未知错误
                 $scope.loading = false;
                 $scope.loginText = "登录";
-                $cordovaToast.show('用户名或密码错误!', 'short', 'center');
+                $cordovaToast.showShortCenter('用户名或密码错误!');
               }
               //loginService.addUser(info);
               //sessionStorage.UserID = info.ID;
@@ -73,15 +71,12 @@ angular.module('starter.UserInfoController', ['ionic',
         $state.go('main');
       };
 
-      // 返回操作
-      $scope.gotoRegiste = function () {
-        //window.open('demos/tutorial3.html');
-        $state.go("registe");
+      $scope.loginSuccess = function () {
+        $scope.goMain();
+        $scope.loading = false;
+        $scope.loginText = "登录";
       };
 
-      // 返回操作
-      $scope.gotoDetail = function () {
-        $state.go('userPwdModify', {userId: '1'});
-      };
+
 
     }]);

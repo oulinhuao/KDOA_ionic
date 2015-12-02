@@ -1,10 +1,8 @@
 angular.module('starter.UserInfoService',['angularSoap',
     'starter.globalservice','ngCordova'])
-
 .factory("UserInfoService", ['$soap',
   'GlobalSetting',
-  '$cordovaSQLite',
-  function($soap,GlobalSetting,$cordovaSQLite){
+  function($soap,GlobalSetting){
     var DBNameUserInfo = "USER_INFO";
 
     var userInfo;
@@ -95,5 +93,5 @@ angular.module('starter.UserInfoService',['angularSoap',
        }
 
 
-     }
-}])
+     };
+}]);

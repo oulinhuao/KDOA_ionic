@@ -1,6 +1,8 @@
 ﻿angular.module('starter.workloglistcontroller',['starter.workloglistservice',
   'ngCordova',
-  'common.dateutils'])
+  'common.dateutils',
+  'DialogService',
+'ionic'])
 
 .controller('WorklogListCtrl', ['$scope',
   '$state',
@@ -12,7 +14,11 @@
   'IsAndroidDevice',
   'Workloglistservice',
   'DateUtils',
-  function ($scope, $state, $timeout, $cordovaNetwork, $cordovaToast, $ionicLoading, IsIOSDevice, IsAndroidDevice, Workloglistservice,DateUtils) {
+  'DialogUtil',
+  '$ionicPopup',
+  function ($scope, $state, $timeout, $cordovaNetwork, $cordovaToast, $ionicLoading,
+            IsIOSDevice, IsAndroidDevice, Workloglistservice,DateUtils,DialogUtil,$ionicPopup
+            ) {
     var mDateUtils = DateUtils;
     // 当前$scope作用域
     var scope;
@@ -143,6 +149,22 @@
         }else{
           $scope.$broadcast('scroll.infiniteScrollComplete');
         }
+      },
+      // 编辑
+      doEdit : function(index,entity){
+        $scope.goEdit(entity);
+      },
+      // 删除数据
+      doDelete: function(index){
+        DialogUtil.dialogConfirm('','确定删除这条数据？').then(function(res){
+          if(res) {
+            alert("确认");
+            //scope.list.splice(index, 1);
+            //$scope.deleteComplete();
+          } else {
+            //alert("取消");
+          }
+        });
       }
     };
 
@@ -157,4 +179,18 @@
     $scope.goDetial = function(pEntity){
       $state.go('worklogdetial',{projEntity:pEntity});
     }
+
+      /**
+       * 编辑日志
+       * @param pEntity
+       */
+    $scope.goEdit = function(pEntity){
+      $state.go('worklogdetial_edit',{projEntity:pEntity});
+    }
+
+    $scope.deleteComplete = function () {
+      scope.allCount --;
+      scope.currentCount --;
+    }
+
 }])

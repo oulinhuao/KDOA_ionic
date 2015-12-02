@@ -16,6 +16,11 @@
     margin-top:10%;
 }
 
+.layout_space_with_btn{
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
 .icon_username:before {
     content:url(../img/icon_people.png);
 }

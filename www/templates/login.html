@@ -1,7 +1,7 @@
 ﻿<ion-view view-title="login">
   <ion-content class="login_bg" scroll="false">
     <img class="login_logo" src="img/logo.png" />
-    <label class="item item-input layout_space">
+    <label class="item item-input layout_space layout_space_with_btn">
       <i class="icon icon_username placeholder-icon"></i>
       <input type="text"
          placeholder="用户名"
@@ -9,7 +9,7 @@
          ng-model="loginData.username">
     </label>
     <div style="height:1px;color:#808080"></div>
-    <label class="item item-input">
+    <label class="item item-input layout_space_with_btn">
       <i class="icon icon_pswd placeholder-icon"></i>
       <input class="input_pswd"
          ng-model="loginData.password"

@@ -80,7 +80,7 @@ angular.module('starter.globalservice', [])
     },
     getUserToken: function() {
       if(typeof(UserToken) == "undefined" || UserToken.length == 0){
-        return '151118135104';
+        return '151126144459';
       }else{
         return UserToken;
       }

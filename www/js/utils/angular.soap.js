@@ -19,7 +19,9 @@ angular.module('angularSoap', [])
 					deferred.resolve(e);
 				}
 			}
+			
 			SOAPClient.invoke(url, action, soapParams, true, soapCallback);
+
 			return deferred.promise;
 		},
 		setCredentials: function(username, password){

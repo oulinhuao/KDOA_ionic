@@ -140,6 +140,17 @@
     font-size: 18px;
 }
 
+.item-content {
+  padding: 10px;
+}
+
+.my-option-size{
+  padding: 0px 22px;
+  border-color: #28a54c;
+  background-color: #33cd5f;
+  color: #fff;
+}
+
 .ion-mine-log{
     content: url(../img/icon_write.png);
     position:relative;
@@ -151,14 +162,12 @@
     top:10px;
 }
 
-.item{
-  padding: 10px;
-}
 .hour-layout{
   float: right;
   margin-left: 10px;
-  margin-top: 5px;
   text-align: right;
+  right: 10px;
+  position: absolute;
 }
 
 .ProjName{
@@ -202,7 +211,7 @@
   float: right;
   text-align: right;
   color: black;
-  font-size: 18px;
+  font-size: 18px; !important;
   width: 70%;
 }
 
@@ -225,5 +234,17 @@
   min-height: 150px;
   overflow: scroll;
 }
+.info-edit{
+  font-size: 18px;
+  padding: 10px;
+  border-style:solid;
+  border-color: #9e9e9e;
+  border-radius: 2px;
+  background-color: white;
+  word-break: keep-all;
+  min-height: 150px;
+  overflow: scroll;
+}
+
 
 
