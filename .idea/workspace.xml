@@ -397,7 +397,13 @@
       <option name="project" value="LOCAL" />
       <updated>1465205825168</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="尝试modal加载列表">
+      <created>1465207000812</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1465207000812</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
