@@ -5,6 +5,10 @@
                        on-refresh="datalist.doRefresh()">
         </ion-refresher>
 
+      <div id="layout_loading_frist" ng-show="datalist.isFrist">
+        <ion-spinner icon="android"></ion-spinner>
+      </div>
+
         <ion-list >
             <ion-item style="padding: 0;"
                       ng-repeat="worklog in datalist.list"
@@ -39,8 +43,6 @@
         on-infinite="datalist.doLoadMore()"
         distance="1%"
         icon="ion-load-a" immediate-check="false">
-
-
       </ion-infinite-scroll>
     </ion-content>
 </ion-view>

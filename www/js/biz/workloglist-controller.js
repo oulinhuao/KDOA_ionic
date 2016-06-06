@@ -2,7 +2,8 @@
   'ngCordova',
   'common.dateutils',
   'DialogService',
-'ionic'])
+  'ionic',
+  'starter.WorklogService'])
 
 .controller('WorklogListCtrl', ['$scope',
   '$state',
@@ -15,10 +16,10 @@
   'Workloglistservice',
   'DateUtils',
   'DialogUtil',
-  '$ionicPopup',
+  'WorklogService',
   function ($scope, $state, $timeout, $cordovaNetwork, $cordovaToast, $ionicLoading,
-            IsIOSDevice, IsAndroidDevice, Workloglistservice,DateUtils,DialogUtil,$ionicPopup
-            ) {
+            IsIOSDevice, IsAndroidDevice, Workloglistservice,DateUtils,DialogUtil,
+            WorklogService) {
     var mDateUtils = DateUtils;
     // 当前$scope作用域
     var scope;
@@ -32,6 +33,7 @@
       allCount : 0,
       currentCount : 0,
       index : 1,
+      isFrist:true,
 
       reset: function(){
         scope.currentPage = 1;
@@ -40,11 +42,13 @@
         scope.allCount = 0;
         scope.currentCount = 0;
         scope.index = 1;
+        scope.isFrist = true;
 
       },
 
       initAction: function () {
         scope.doRefresh();
+
 
       },
       /**
@@ -73,6 +77,7 @@
           };
 
           var successCallback = function(response){
+            scope.isFrist = false;
             if("InvaildToken" === response){
               // 需要登录
               $cordovaToast.showShortBottom("您还没有登录...");
@@ -99,8 +104,8 @@
               $scope.$broadcast('scroll.refreshComplete');
               //$scope.$broadcast('scroll.infiniteScrollComplete');
             }
-
           };
+
           scope.reset();
           Workloglistservice.getWorklogListPaged(1,successCallback);
 
@@ -171,6 +176,14 @@
 
     scope.initAction();
 
+    scope.showLoading = function() {
+      $ionicLoading.show({
+        template: '加载中...'
+      });
+    };
+    scope.hideLoading = function(){
+      $ionicLoading.hide();
+    };
 
     $scope.goMain = function () {
       $state.go('main');
@@ -192,5 +205,7 @@
       scope.allCount --;
       scope.currentCount --;
     }
+
+
 
 }])

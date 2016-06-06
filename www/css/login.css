@@ -46,6 +46,15 @@
     content: ' ';
 }
 
+.btn_bottom{
+  width:auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  font-size: 0;
+}
+
 .layout_checkbox{
 	margin-top: 4%;
 }

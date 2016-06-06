@@ -69,24 +69,28 @@ angular.module('starter.globalservice', [])
       localTxtPath = path;
     },
     getUserId: function() {
-      if(typeof(UserId) == "undefined" || UserId == 0) {
-        return 22;
-      }else{
-        return UserId;
-      }
+      return localStorage.getItem("userId");
+      //if(typeof(UserId) == "undefined" || UserId == 0) {
+      //  return 22;
+      //}else{
+      //  return UserId;
+      //}
     },
     setUserId: function(id) {
-      UserId = id;
+      localStorage.setItem("userId",id);
+      //UserId = id;
     },
     getUserToken: function() {
-      if(typeof(UserToken) == "undefined" || UserToken.length == 0){
-        return '151126144459';
-      }else{
-        return UserToken;
-      }
+      return localStorage.getItem("token");
+      //if(typeof(UserToken) == "undefined" || UserToken.length == 0){
+      //  return '151126144459';
+      //}else{
+      //  return UserToken;
+      //}
     },
     setUserToken: function(token) {
-      UserToken = token;
+      localStorage.setItem("token",token);
+      //UserToken = token;
     },
     initSetting: function() {
       localPageSize = 20;

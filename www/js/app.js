@@ -20,7 +20,8 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.UserInfoController',
   'starter.UserInfoService',
   'starter.WorklogController',
-  'starter.workloglistcontroller'
+  'starter.workloglistcontroller',
+  'starter.SelectorService'
   ])
 
 
@@ -185,6 +186,7 @@ angular.module('starter', ['ionic', 'ngCordova',
           templateUrl: 'templates/worklog_detial_edit.html',
           controller: 'WorklogCtrl'
         })
+
 
 
 

@@ -37,11 +37,10 @@
     line-height: 50px;
 }
 
-.btn_mine:before {
-    position:absolute;
-    right:-8px;
-    top:-3px;
-    content: url(../img/head_people.png);
+.btn_mine {
+  width: 50px;
+  height: 34px;
+
 }
 .bar.bar-positive {
     background-color: #207dba;
@@ -246,5 +245,10 @@
   overflow: scroll;
 }
 
-
+#layout_loading_frist{
+  text-align: center;
+  margin:0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 

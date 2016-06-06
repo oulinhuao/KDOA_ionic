@@ -1,4 +1,4 @@
-﻿<ion-view >
+﻿<ion-view style=" background-color: #d9d9d9;">
 
   <ion-header-bar align-title="center" class="bar-positive bar bar-header disable-user-behavior">
 
@@ -7,7 +7,7 @@
     <i class="btn_log_menu"></i>
   </ion-header-bar>
 
-  <ion-content scroll="true" style=" background-color: #d9d9d9;">
+  <ion-content scroll="true" style=" background-color: #d9d9d9;bottom: 65px;">
 
     <div style="margin: 10px;">
       <div class="info-item">
@@ -15,7 +15,7 @@
         <a class="info-type">部门名称</a>
       </div>
       <div class="info-item">
-        <a class="info-value">{{mEntity.ProjName}}</a>
+        <a class="info-value" ng-click="openModal(1);">{{mEntity.ProjName}}</a>
         <a class="info-type">项目名称</a>
       </div>
       <div class="info-item">
@@ -37,11 +37,29 @@
               style="text-align: start;width: 100%;line-height: 1.2;font-size: 18px;"
               ng-model="mEntity.WorkContent">
       </textarea>
+      <textarea class="info-content"
+              style="text-align: start;width: 100%;line-height: 1.2;font-size: 18px;min-height:0; "
+              ng-model="mEntity.Remark" placeholder="备注">
+      </textarea>
+
 
 
     </div>
 
   </ion-content>
+
+  <ion-footer-bar style="background-color: #d9d9d9;padding: 10px;m">
+    <button class="button button-block button-stable"
+            style="
+              margin-top: -15px;
+              position: static;
+              min-height: 46px;
+              font-size: 18px;"
+
+            ng-click="doLogin()">
+      保存
+    </button>
+  </ion-footer-bar>
 
 
 
