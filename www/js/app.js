@@ -20,7 +20,10 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.UserInfoController',
   'starter.UserInfoService',
   'starter.WorklogController',
+  'starter.WorklogDetialController',
+  'starter.WorklogEditController',
   'starter.workloglistcontroller',
+  'starter.SelectorController',
   'starter.SelectorService'
   ])
 
@@ -170,21 +173,23 @@ angular.module('starter', ['ionic', 'ngCordova',
         })
 
         .state('worklogdetial', {
+          cache: false,
           url: '/detial',
           params: {
             'projEntity': null
           },
           templateUrl: 'templates/worklog_detial.html',
-          controller: 'WorklogCtrl'
+          controller: 'WorklogDetialCtrl'
         })
 
         .state('worklogdetial_edit', {
+          cache: false,
           url: '/detial_edit',
           params: {
             'projEntity': null
           },
           templateUrl: 'templates/worklog_detial_edit.html',
-          controller: 'WorklogCtrl'
+          controller: 'WorklogEditCtrl'
         })
 
 

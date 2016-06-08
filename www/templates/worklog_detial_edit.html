@@ -2,7 +2,7 @@
 
   <ion-header-bar align-title="center" class="bar-positive bar bar-header disable-user-behavior">
 
-    <button class=" button buttons button-icon ion-arrow-left-c header-item" ng-click="goWorklog()"></button>
+    <button class=" button buttons button-icon ion-arrow-left-c header-item" ng-click="$ionicGoBack()"></button>
     <h1 class="title">日志修改</h1>
     <i class="btn_log_menu"></i>
   </ion-header-bar>
@@ -11,15 +11,15 @@
 
     <div style="margin: 10px;">
       <div class="info-item">
-        <a class="info-value">{{mEntity.CompName}}</a>
+        <a class="info-value" ng-click="openModal(0);">{{mEntity.CompName}}</a>
         <a class="info-type">部门名称</a>
       </div>
       <div class="info-item">
-        <a class="info-value" ng-click="openModal(1);">{{mEntity.ProjName}}</a>
+        <a class="info-value" ng-click="openModal(2);">{{mEntity.ProjName}}</a>
         <a class="info-type">项目名称</a>
       </div>
       <div class="info-item">
-        <a class="info-value">{{mEntity.WorkTypeName}}</a>
+        <a class="info-value" ng-click="openModal(1);">{{mEntity.WorkTypeName}}</a>
         <a class="info-type">工作类型</a>
       </div>
       <div class="info-item">

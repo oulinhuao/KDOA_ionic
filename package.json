@@ -25,6 +25,7 @@
     "cordova-plugin-x-toast"
   ],
   "cordovaPlatforms": [
-    "android"
+    "android",
+    "ios"
   ]
 }
