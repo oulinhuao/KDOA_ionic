@@ -8,7 +8,26 @@
       Ionic Framework Team
     </author>
   <content src="index.html"/>
-  <access origin="*"/>
+
+  <access origin="cdvfile://*" />
+
+  <!-- Allow links to web pages to open in a browser -->
+  <allow-intent href="http://*/*" />
+  <allow-intent href="https://*/*" />
+  <!-- Allow SMS links to open messaging app -->
+  <allow-intent href="sms:*" />
+  <!-- Allow tel: links to open the dialer -->
+  <allow-intent href="tel:*" />
+  <!-- Allow geo: links to open maps -->
+  <allow-intent href="geo:*" />
+  <!-- Allow all unrecognized URLs to open installed apps
+       *NOT RECOMMENDED* -->
+  <allow-intent href="*" />
+  <!-- Enable requests to content: URLs -->
+  <access origin="content:///*" />
+  <!-- Don't block any requests -->
+  <access origin="*" />
+
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
@@ -17,11 +36,19 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="AndroidPersistentFileLocation" value="Internal"/>
-  <preference name="AndroidPersistentFileLocation" value="Compatibility"/>
+  <!--<preference name="AndroidPersistentFileLocation" value="Compatibility"/>-->
   <preference name="iosPersistentFileLocation" value="Library"/>
   <preference name="iosPersistentFileLocation" value="Compatibility"/>
+  <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
+  <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
+  </feature>
+  <feature name="File">
+    <param name="ios-package" value="CDVFile" />
+  </feature>
+  <feature name="FileTransfer">
+    <param name="ios-package" value="CDVFileTransfer" />
   </feature>
   <platform name="android">
     <icon src="resources/android/icon/app_icon.png" density="ldpi"/>
