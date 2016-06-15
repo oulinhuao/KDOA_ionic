@@ -49,9 +49,9 @@ angular.module('starter.UserInfoController', [
               if(info.ServerId > 0){
                 GlobalSetting.setUserId(info.ServerId);
                 GlobalSetting.setUserToken(info.Token);
-                //UserInfoService.insertOrUpdate(info);
-
                 $scope.loginSuccess();
+                UserInfoService.insertOrUpdate(info);
+                UserInfoService.insertOrUpdateLoginUser(info);
               }else{
                 // 未知错误
                 $scope.loading = false;

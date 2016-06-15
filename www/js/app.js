@@ -9,7 +9,7 @@
 // 'starter.controllers' is found in controllers.js
 
 // database handle
-//var db = null;
+var db = null;
 
 angular.module('starter', ['ionic', 'ngCordova',
   'starter.controllers',
@@ -99,14 +99,18 @@ angular.module('starter', ['ionic', 'ngCordova',
             }
             return false;
           }, 101); //不回退页面（优先级100）
+
+
+          db = DBHelper.opendb("Android");
         } else if (ionic.Platform.isIOS()) { // ios设备
           //GlobalSetting.setLocalPath(cordova.file.dataDirectory);
+          // init database object
+          db = DBHelper.opendb("iOS");
         }
-        //// init database object
-        //db = DBHelper.opendb();
-        ////DBHelper.dropTable();
-        //// create table
-        //DBHelper.createTable();
+
+        DBHelper.dropTable();
+        // create table
+        DBHelper.createTable();
 
       });
     }

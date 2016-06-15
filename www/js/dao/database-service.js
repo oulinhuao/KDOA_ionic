@@ -3,16 +3,15 @@ angular.module('starter.databaseservice', ['ngCordova'])
 		function($cordovaSQLite) {
 
 			return {
-				opendb: function() {
+				opendb: function(platform) {
 					var db = null; // database handle
-					// init database object
-					if (window.cordova) {
-						var dbName = 'KDOA.db';
-						var query = '';
-						db = $cordovaSQLite.openDB(dbName);
-					} else {
-					    db = window.openDatabase("KDOA", '1', 'KDOA', 1024 * 1024 * 100); // browser
-					}
+          if(platform === "Android"){
+            // Works on android but not in iOS
+            db = $cordovaSQLite.openDB({ name: "KDOAIonic.db", iosDatabaseLocation:'default'});
+          } else if(platform === "iOS"){
+            // Works on iOS
+            db = window.sqlitePlugin.openDatabase({ name: "KDOAIonic.db", location: 2, createFromLocation: 1});
+          }
 					return db;
 				},
 				closedb: function() {
@@ -42,10 +41,23 @@ angular.module('starter.databaseservice', ['ngCordova'])
             "'UPDATE_TIME' INTEGER NOT NULL ," + // 17: UpdateTime 更新时间
             "'TOKEN' TEXT);";// 18: Token Token
 					$cordovaSQLite.execute(db,sql );
+
+          //LOGIN_INFO 登录信息
+          sql = "CREATE TABLE IF NOT EXISTS 'LOGIN_INFO' (" + //
+            "'LOCAL_ID' INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: LocalId 本地Id
+            "'SERVER_ID' INTEGER NOT NULL ," + // 1: ServerId 服务端Id
+            "'USER_NAME' TEXT," + // 2: UserName 用户名
+            "'PSWD' TEXT," + // 3: Pswd 姓名
+            "'PSWD_LEN' INTEGER," + // Pswd 长度
+            "'AUTO_LOGIN' TEXT," + // 4: AutoLogin 自动登录
+            "'LOGIN_TIME' INTEGER NOT NULL)"; // 5: 上次登录时间
+          $cordovaSQLite.execute(db,sql );
+
+
 				},
 				dropTable: function() {
-
-					$cordovaSQLite.execute(db, "DROP TABLE 'USER_INFO'");
+          $cordovaSQLite.execute(db, "DROP TABLE 'LOGIN_INFO'");
+          $cordovaSQLite.execute(db, "DROP TABLE 'USER_INFO'");
 
 				}
 			}
