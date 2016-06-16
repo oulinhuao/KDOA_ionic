@@ -108,7 +108,10 @@ angular.module('starter', ['ionic', 'ngCordova',
           db = DBHelper.opendb("iOS");
         }
 
-        DBHelper.dropTable();
+        // 测试
+        //DBHelper.dropTable();
+        // 测试结束
+
         // create table
         DBHelper.createTable();
 
