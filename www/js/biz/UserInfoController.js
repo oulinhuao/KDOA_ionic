@@ -14,10 +14,10 @@ angular.module('starter.UserInfoController', [
       $scope.loadingShow = false;
       $scope.loginText = "登录";
 
+      // 去数据库获取上次登录的帐号（加个延时,不加延时有问题，暂未解决）
       $timeout(function() {
         $scope.getLastUser();
-      },1000);
-
+      },500);
 
 
       // 登录操作
@@ -73,11 +73,15 @@ angular.module('starter.UserInfoController', [
       };
 
       $scope.getLastUser = function(){
-        var user = UserInfoService.getEntityLastLogin();
-        if(user != null && typeof(user) != "undefined" && user.ServerId > 0){
-          $scope.loginData.username = user.UserName;
-          $scope.loginData.password = user.Pswd;
-        }
+        UserInfoService.getEntityLastLogin(function(entity){
+          if(entity != null && typeof(entity) != "undefined" && entity.SERVER_ID > 0){
+            $scope.loginData.username = entity.USER_NAME;
+            $scope.loginData.password = entity.PSWD;
+          }
+        },function(err){
+          console.log(err.message);
+        });
+
       };
 
 

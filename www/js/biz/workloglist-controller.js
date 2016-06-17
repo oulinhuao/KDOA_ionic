@@ -17,9 +17,10 @@
   'DateUtils',
   'DialogUtil',
   'WorklogService',
+  '$ionicListDelegate',
   function ($scope, $state, $timeout, $cordovaNetwork, $cordovaToast, $ionicLoading,
             IsIOSDevice, IsAndroidDevice, Workloglistservice,DateUtils,DialogUtil,
-            WorklogService) {
+            WorklogService,$ionicListDelegate) {
     var mDateUtils = DateUtils;
     // 当前$scope作用域
     var scope;
@@ -190,6 +191,7 @@
     };
 
     $scope.goDetial = function(pEntity){
+      $ionicListDelegate.closeOptionButtons();
       $state.go('worklogdetial',{projEntity:pEntity});
     }
 

@@ -162,6 +162,7 @@ angular.module('starter', ['ionic', 'ngCordova',
 
         .state('worklog.list', {
           url: '/list',
+          cache: false,
           views: {
             'worklog-list': {
               templateUrl: 'templates/worklog_list.html',
