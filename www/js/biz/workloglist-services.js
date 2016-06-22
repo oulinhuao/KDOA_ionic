@@ -22,8 +22,8 @@
      */
     getWorklogListPaged: function (index,callbackMethod) {
       return $soap.post(GlobalSetting.getUrlBusiness(), "GetMyWorkLogListPaged", {
-        beginWorkDate:"",
-        endWorkDate:"2015-12-1",
+        beginWorkDate:"2001-12-1",
+        endWorkDate:"",
         pageIndex: index,
         pageSize: GlobalSetting.getServerPageSize(),
         userId: GlobalSetting.getUserId(),

@@ -3,7 +3,7 @@
   <ion-header-bar align-title="center" class="bar-positive bar bar-header disable-user-behavior">
 
     <button class=" button buttons button-icon ion-arrow-left-c header-item" ng-click="$ionicGoBack()"></button>
-    <h1 class="title">日志修改</h1>
+    <h1 class="title">{{mTitle}}</h1>
     <i class="btn_log_menu"></i>
   </ion-header-bar>
 
@@ -53,7 +53,7 @@
               position: static;
               min-height: 46px;
               font-size: 18px;"
-            ng-click="doLogin()">
+            ng-click="mCtrl.submitSave()">
       保存
     </button>
   </ion-footer-bar>

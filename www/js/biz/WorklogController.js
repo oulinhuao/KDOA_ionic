@@ -1,19 +1,17 @@
 ﻿angular.module('starter.WorklogController',[
-  'ngCordova',
-  'common.dateutils',
-  'starter.WorklogService'])
+  'ngCordova'])
 
 .controller('WorklogCtrl', ['$scope',
   '$state',
-  '$stateParams',
-  'DateUtils',
-  'WorklogService',
-  function ($scope, $state,$stateParams,DateUtils,
-            WorklogService) {
-    $scope.mDateUtils = DateUtils;
+  function ($scope,$state) {
 
     $scope.goMain = function () {
       $state.go('main');
     };
+    $scope.goAddWorklog = function () {
+      $state.go('worklogdetial_edit');
+    };
+
+
 
 }])

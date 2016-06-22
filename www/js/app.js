@@ -12,14 +12,16 @@
 var db = null;
 
 angular.module('starter', ['ionic', 'ngCordova',
-  'starter.controllers',
   'starter.services',
   'starter.databaseservice',
   'starter.globalservice',
+  'starter.DatePickerService',
+
   'starter.MainController',
   'starter.UserInfoController',
   'starter.UserInfoService',
   'starter.WorklogController',
+  'starter.WorklogService',
   'starter.WorklogDetialController',
   'starter.WorklogEditController',
   'starter.workloglistcontroller',
@@ -103,8 +105,6 @@ angular.module('starter', ['ionic', 'ngCordova',
 
           db = DBHelper.opendb("Android");
         } else if (ionic.Platform.isIOS()) { // ios设备
-          //GlobalSetting.setLocalPath(cordova.file.dataDirectory);
-          // init database object
           db = DBHelper.opendb("iOS");
         }
 
@@ -206,4 +206,9 @@ angular.module('starter', ['ionic', 'ngCordova',
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/login');
 
-    }]);
+    }])
+
+
+;
+
+

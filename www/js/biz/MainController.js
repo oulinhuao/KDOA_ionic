@@ -3,7 +3,12 @@
 
 .controller('MainCtrl', ['$scope',
   '$state',
-  function ($scope, $state) {
+  '$ionicSideMenuDelegate',
+  function ($scope, $state,$ionicSideMenuDelegate) {
+
+    $scope.toggleRightMemu = function () {
+      $ionicSideMenuDelegate.toggleRight();
+    };
 
     $scope.goWorklog = function(){
       $state.go('worklog');

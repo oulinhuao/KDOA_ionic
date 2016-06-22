@@ -158,15 +158,35 @@
       },
       // 编辑
       doEdit : function(index,entity){
-        $scope.goEdit(entity);
+        $ionicListDelegate.closeOptionButtons();
+        $state.go('worklogdetial_edit',{projEntity:pEntity});
       },
       // 删除数据
       doDelete: function(index){
+        $ionicListDelegate.closeOptionButtons();
         DialogUtil.dialogConfirm('','确定删除这条数据？').then(function(res){
           if(res) {
-            alert("确认");
-            //scope.list.splice(index, 1);
-            //$scope.deleteComplete();
+            $ionicLoading.show({
+              content: '加载中...',
+              animation: 'fade-in',
+              showBackdrop: true,
+              maxWidth: 200,
+              showDelay: 0
+            });
+            WorklogService.deleteWorklog(scope.list[index]).then(function(response){
+              $ionicLoading.hide();
+              if("InvaildToken" === response){
+                // 需要登录
+                $cordovaToast.showShortBottom("您的帐号在其他设备登录，请重新登录");
+              }else {
+                // 成功 返回的是时间字符串 yyyy-MM-dd hh:mm:ss
+                if(response != undefined && response.length > 4){
+                  scope.list.splice(scope.list.indexOf(index), 1);
+                  return;
+                }
+              }
+              $cordovaToast.showShortBottom("删除失败");
+            });
           } else {
             //alert("取消");
           }
@@ -195,13 +215,6 @@
       $state.go('worklogdetial',{projEntity:pEntity});
     }
 
-      /**
-       * 编辑日志
-       * @param pEntity
-       */
-    $scope.goEdit = function(pEntity){
-      $state.go('worklogdetial_edit',{projEntity:pEntity});
-    }
 
     $scope.deleteComplete = function () {
       scope.allCount --;
