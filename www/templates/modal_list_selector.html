@@ -1,0 +1,21 @@
+﻿<ion-modal-view ng-controller="SelectorCtrl">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">请选择</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()">取消</button>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <div id="layout_loading_frist" ng-show="mSelectorService.mData.mIsCanShowLoadin">
+      <ion-spinner icon="android"></ion-spinner>
+    </div>
+    <ion-list >
+      <ion-item style="padding: 0;"
+                ng-repeat="DisplayData in mSelectorService.mData.mDispLayData | orderBy:Name"
+                ng-click="mSelectorService.mListCtrl.onItemClick(DisplayData)">
+        <div class="item-content">
+          {{DisplayData.Name}}
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>
