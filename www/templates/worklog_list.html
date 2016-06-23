@@ -2,16 +2,16 @@
     <ion-content scroll="true" style="margin-top:40px">
         <ion-refresher pulling-icon="ion-loading-c" pulling-text="下拉刷新"
                        refreshing-text="刷新成功" refreshing-icon="ion-loading-c"
-                       on-refresh="datalist.doRefresh()">
+                       on-refresh="ctrl.doRefresh()">
         </ion-refresher>
 
-      <div id="layout_loading_frist" ng-show="datalist.isFrist">
+      <div id="layout_loading_frist" ng-show="ctrl.isFrist">
         <ion-spinner icon="android"></ion-spinner>
       </div>
 
         <ion-list >
             <ion-item style="padding: 0;"
-                      ng-repeat="worklog in datalist.list"
+                      ng-repeat="worklog in ctrl.list"
                       ng-click="goDetial(worklog)">
                 <div class="hour-layout">
                   <a class="hour-value">{{worklog.WorkHour}}</a>
@@ -24,20 +24,20 @@
                 </div>
               <ion-option-button
                 class="button-balanced my-option-size"
-                ng-click="datalist.doEdit($index,worklog)">
+                ng-click="ctrl.doEdit($index,worklog)">
                 修改
               </ion-option-button>
               <ion-option-button
                 class="button-assertive my-option-size"
-                ng-click="datalist.doDelete($index)">
+                ng-click="ctrl.doDelete($index)">
                 删除
               </ion-option-button>
             </ion-item>
         </ion-list>
 
       <ion-infinite-scroll
-        ng-if="datalist.currentCount != 0 && datalist.currentCount <= datalist.allCount"
-        on-infinite="datalist.doLoadMore()"
+        ng-if="ctrl.currentCount != 0 && ctrl.currentCount <= ctrl.allCount"
+        on-infinite="ctrl.doLoadMore()"
         distance="1%"
         icon="ion-load-a" immediate-check="false">
       </ion-infinite-scroll>

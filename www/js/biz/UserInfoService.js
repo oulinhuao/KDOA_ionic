@@ -14,18 +14,20 @@ angular.module('starter.UserInfoService',['angularSoap',
            {UserName: userName, Pswd: pwd});
        },
        getEntity : function(serverId,successCallback, failCallback){
-        var sql = "SELECT * FROM "
-          +DBNameUserInfo
-          +" WHERE SERVER_ID = ?";
-         $cordovaSQLite.execute(db,sql,[serverId]).then(function (res) {
-           var entity = null;
-           if(res.rows.length > 0) {
-             entity=res.rows.item(0);
-           }
-           successCallback(entity);
-         },failCallback);
+         if(db === null) return;
+          var sql = "SELECT * FROM "
+            +DBNameUserInfo
+            +" WHERE SERVER_ID = ?";
+           $cordovaSQLite.execute(db,sql,[serverId]).then(function (res) {
+             var entity = null;
+             if(res.rows.length > 0) {
+               entity=res.rows.item(0);
+             }
+             successCallback(entity);
+           },failCallback);
        },
        insert : function (userInfoEntity){
+         if(db === null) return;
          var insertSql = "INSERT INTO "
            +DBNameUserInfo
            +" (SERVER_ID,USER_NAME,PSWD,USER_TYPE,REAL_NAME,SEX,DUTY," + // 8: Duty 职位
@@ -51,6 +53,7 @@ angular.module('starter.UserInfoService',['angularSoap',
          ]);
        },
        updata : function(userInfoEntity){
+         if(db === null) return;
          var updateSql = "update "
            +DBNameUserInfo
            +" set "
@@ -74,6 +77,8 @@ angular.module('starter.UserInfoService',['angularSoap',
            userInfoEntity.LOCAL_ID]);
        },
        insertOrUpdate:function(userInfoEntity){
+         if(db === null) return;
+
          scope.getEntity(userInfoEntity.ServerId,function(entity){
            if(null != entity && typeof(entity) != "undefined" && entity.SERVER_ID > 0){
              userInfoEntity.LOCAL_ID = entity.LOCAL_ID;
@@ -85,6 +90,8 @@ angular.module('starter.UserInfoService',['angularSoap',
        },
 
        getEntityLoginById : function(id,successCallback, failCallback){
+         if(db === null) return;
+
          var sql = "select * from "
            +DBNameLoginInfo
            + " where SERVER_ID = ?";
@@ -98,6 +105,8 @@ angular.module('starter.UserInfoService',['angularSoap',
          },failCallback);
        },
        getEntityLastLogin : function(successCallback, failCallback){
+         if(db === null) return;
+
          var sql = "SELECT * FROM "
            +DBNameLoginInfo;
            +" ORDER BY LOGIN_TIME DESC LIMIT 0,1 ";
@@ -111,6 +120,8 @@ angular.module('starter.UserInfoService',['angularSoap',
          },failCallback);
        },
        insertUserLogin : function (userInfoEntity){
+         if(db === null) return;
+
          var insertSql = "INSERT INTO "
            + DBNameLoginInfo
            +" (SERVER_ID,USER_NAME,PSWD,PSWD_LEN,AUTO_LOGIN,LOGIN_TIME)"+//
@@ -125,6 +136,8 @@ angular.module('starter.UserInfoService',['angularSoap',
          ]);
        },
        updateLoginUser : function(entity){
+         if(db === null) return;
+
          if(!entity.AutoLogin){
            entity.AutoLogin = false;
          }
@@ -144,6 +157,8 @@ angular.module('starter.UserInfoService',['angularSoap',
            entity.LOCAL_ID]);
        },
        insertOrUpdateLoginUser:function(userInfoEntity){
+         if(db === null) return;
+
          scope.getEntityLoginById(userInfoEntity.ServerId,function(entity){
            if(entity != null && typeof(entity) != "undefined" && entity.SERVER_ID > 0){
              userInfoEntity.LOCAL_ID = entity.LOCAL_ID;

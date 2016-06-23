@@ -3,28 +3,24 @@
   'common.dateutils',
   'DialogService',
   'ionic',
-  'starter.WorklogService'])
+  'starter.WorklogService',
+  'starter.CommentUtilsService'])
 
 .controller('WorklogListCtrl', ['$scope',
   '$state',
   '$timeout',
-  '$cordovaNetwork',
-  '$cordovaToast',
-  '$ionicLoading',
-  'IsIOSDevice',
-  'IsAndroidDevice',
   'Workloglistservice',
   'DateUtils',
   'DialogUtil',
   'WorklogService',
   '$ionicListDelegate',
-  function ($scope, $state, $timeout, $cordovaNetwork, $cordovaToast, $ionicLoading,
-            IsIOSDevice, IsAndroidDevice, Workloglistservice,DateUtils,DialogUtil,
-            WorklogService,$ionicListDelegate) {
+  'CommentUtils',
+  function ($scope, $state, $timeout,
+            Workloglistservice,DateUtils,DialogUtil,
+            WorklogService,$ionicListDelegate,CommentUtils) {
     var mDateUtils = DateUtils;
     // 当前$scope作用域
-    var scope;
-    scope = $scope.datalist = {
+    $scope.ctrl = {
       // 当前页码
       currentPage: 1,
       // 是否还有数据
@@ -37,31 +33,30 @@
       isFrist:true,
 
       reset: function(){
-        scope.currentPage = 1;
-        scope.noMoreData = false;
-        scope.list = [];
-        scope.allCount = 0;
-        scope.currentCount = 0;
-        scope.index = 1;
-        scope.isFrist = true;
+        $scope.ctrl.currentPage = 1;
+        $scope.ctrl.noMoreData = false;
+        $scope.ctrl.list = [];
+        $scope.ctrl.allCount = 0;
+        $scope.ctrl.currentCount = 0;
+        $scope.ctrl.index = 1;
+        $scope.ctrl.isFrist = true;
 
       },
 
       initAction: function () {
-        scope.doRefresh();
-
+        $scope.ctrl.doRefresh();
 
       },
       /**
        * 下拉下载
        */
       doRefresh: function () {
-        //if (IsAndroidDevice || IsIOSDevice) {
-        //    if ($cordovaNetwork.isOffline()) {
-        //        $cordovaToast.showShortBottom("当前网络无连接！");
-        //        return;
-        //    }
-        //}
+        $scope.ctrl.noMoreData = true;
+        if (!CommentUtils.n.isOnline(true)) {
+          $scope.ctrl.isFrist = false;
+          $scope.$broadcast('scroll.refreshComplete');
+            return;
+        }
         $timeout(function () {
           /**
            * 调用返回数据
@@ -71,21 +66,21 @@
            */
           var callback = function(flag){
             if(flag == -1){
-              $cordovaToast.showShortBottom("访问异常...");
+              CommentUtils.t.showToast("访问异常...");
             }else if(flag == 0){
-              $cordovaToast.showShortBottom("没有更多...");
+              CommentUtils.t.showToast("没有更多...");
             }
           };
 
           var successCallback = function(response){
-            scope.isFrist = false;
+            $scope.ctrl.isFrist = false;
             if("InvaildToken" === response){
               // 需要登录
-              $cordovaToast.showShortBottom("您还没有登录...");
+              CommentUtils.t.showToast("您还没有登录...");
               $scope.$broadcast('scroll.refreshComplete');
             }else{
               var objResponse = JSON.parse(response);
-              scope.allCount = objResponse.total;
+              $scope.ctrl.allCount = objResponse.total;
               var objDataList = objResponse.pageData;
               var arrEntity = [];
               for (var n = 0; n < objDataList.length; n++) {
@@ -99,37 +94,38 @@
                   CreateDate : obj.CreateDate,
                   WorkContent : obj.WorkContent, Remark : obj.Remark,
                   IsDeleted : obj.IsDeleted, UpdateTime : obj.UpdateTime};
-                scope.currentCount++;
-                scope.list.push(entity);
+                $scope.ctrl.currentCount++;
+                $scope.ctrl.list.push(entity);
               }
               $scope.$broadcast('scroll.refreshComplete');
-              //$scope.$broadcast('scroll.infiniteScrollComplete');
             }
           };
 
-          scope.reset();
+          $scope.ctrl.reset();
           Workloglistservice.getWorklogListPaged(1,successCallback);
 
         });
 
-        //$scope.$broadcast('scroll.refreshComplete');
       },
       /**
        * 加载更多
        */
       doLoadMore:function(){
+        if (!CommentUtils.n.isOnline(true)) {
+          return;
+        }
+
         var successCallback = function(response){
           if("InvaildToken" === response){
             // 需要登录
-            $cordovaToast.showShortBottom("您还没有登录...");
+            CommentUtils.t.showToast("您还没有登录...");
             $scope.$broadcast('scroll.refreshComplete');
           }else{
             var objResponse = JSON.parse(response);
             var objDataList = objResponse.pageData;
-            var arrEntity = [];
             var size = objDataList.length;
             if(size > 0){
-              scope.index ++;
+              $scope.ctrl.index ++;
             }
             for (var n = 0; n < size; n++) {
               var obj = objDataList[n];
@@ -142,16 +138,16 @@
                 CreateDate : obj.CreateDate,
                 WorkContent : obj.WorkContent, Remark : obj.Remark,
                 IsDeleted : obj.IsDeleted, UpdateTime : obj.UpdateTime};
-              scope.currentCount++;
-              scope.list.push(entity);
+              $scope.ctrl.currentCount++;
+              $scope.ctrl.list.push(entity);
             }
             $scope.$broadcast('scroll.refreshComplete');
             $scope.$broadcast('scroll.infiniteScrollComplete');
           }
 
         };
-        if(scope.currentCount <= scope.allCount){
-          Workloglistservice.getWorklogListPaged(scope.index+1,successCallback);
+        if($scope.ctrl.currentCount <= $scope.ctrl.allCount){
+          Workloglistservice.getWorklogListPaged($scope.ctrl.index+1,successCallback);
         }else{
           $scope.$broadcast('scroll.infiniteScrollComplete');
         }
@@ -159,33 +155,26 @@
       // 编辑
       doEdit : function(index,entity){
         $ionicListDelegate.closeOptionButtons();
-        $state.go('worklogdetial_edit',{projEntity:pEntity});
+        $state.go('worklogdetial_edit',{projEntity:entity});
       },
       // 删除数据
       doDelete: function(index){
-        $ionicListDelegate.closeOptionButtons();
         DialogUtil.dialogConfirm('','确定删除这条数据？').then(function(res){
           if(res) {
-            $ionicLoading.show({
-              content: '加载中...',
-              animation: 'fade-in',
-              showBackdrop: true,
-              maxWidth: 200,
-              showDelay: 0
-            });
-            WorklogService.deleteWorklog(scope.list[index]).then(function(response){
-              $ionicLoading.hide();
+            CommentUtils.l.showLoading();
+            WorklogService.deleteWorklog($scope.ctrl.list[index]).then(function(response){
+              CommentUtils.l.hideLoading();
               if("InvaildToken" === response){
                 // 需要登录
-                $cordovaToast.showShortBottom("您的帐号在其他设备登录，请重新登录");
+                CommentUtils.t.showToast("您的帐号在其他设备登录，请重新登录");
               }else {
                 // 成功 返回的是时间字符串 yyyy-MM-dd hh:mm:ss
                 if(response != undefined && response.length > 4){
-                  scope.list.splice(scope.list.indexOf(index), 1);
+                  $scope.ctrl.list.splice(index, 1);
                   return;
                 }
               }
-              $cordovaToast.showShortBottom("删除失败");
+              CommentUtils.t.showToast("删除失败");
             });
           } else {
             //alert("取消");
@@ -195,16 +184,7 @@
     };
 
 
-    scope.initAction();
-
-    scope.showLoading = function() {
-      $ionicLoading.show({
-        template: '加载中...'
-      });
-    };
-    scope.hideLoading = function(){
-      $ionicLoading.hide();
-    };
+    $scope.ctrl.initAction();
 
     $scope.goMain = function () {
       $state.go('main');
@@ -217,8 +197,8 @@
 
 
     $scope.deleteComplete = function () {
-      scope.allCount --;
-      scope.currentCount --;
+      $scope.ctrl.allCount --;
+      $scope.ctrl.currentCount --;
     }
 
 

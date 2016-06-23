@@ -1,15 +1,17 @@
 angular.module('starter.UserInfoController', [
   'ngCordova',
   'starter.globalservice',
-  'starter.UserInfoService'])
+  'starter.UserInfoService',
+  'starter.CommentUtilsService'])
 
   .controller('UserInfoCtrl',['$scope',
     '$state',
     'UserInfoService',
-    '$cordovaToast',
     'GlobalSetting',
     '$timeout',
-    function ($scope, $state, UserInfoService, $cordovaToast,GlobalSetting,$timeout) {
+    'CommentUtils',
+    function ($scope, $state,
+              UserInfoService, GlobalSetting,$timeout,CommentUtils) {
       $scope.loginData = {username:'',password:''};
       $scope.loadingShow = false;
       $scope.loginText = "登录";
@@ -27,12 +29,16 @@ angular.module('starter.UserInfoController', [
           var pwd = $scope.loginData.password;
           // 必须输入验证
           if (typeof(name) == "undefined" || name.length == 0) {
-            $cordovaToast.showShortCenter('用户名必须输入!');
+            CommentUtils.t.showToast('用户名必须输入!');
             return false;
           }
           if (typeof(pwd) == "undefined" || pwd.length == 0) {
-            $cordovaToast.showShortCenter('密码必须输入!');
+            CommentUtils.t.showToast('密码必须输入!');
             return false;
+          }
+
+          if(!CommentUtils.n.isOnline(true)){
+            return;
           }
 
           $scope.loadingShow = true;
@@ -43,7 +49,7 @@ angular.module('starter.UserInfoController', [
             $scope.loadingShow = false;
 
             if (response == '-1' || response == '' || response == 'undefined' || response == null) {
-              $cordovaToast.showShortCenter('用户名或密码错误!');
+              CommentUtils.t.showToast('用户名或密码错误!');
             } else {
               var info = JSON.parse(response);
               if(info.ServerId > 0){
@@ -55,7 +61,7 @@ angular.module('starter.UserInfoController', [
               }else{
                 // 未知错误
                 $scope.loginText = "登录";
-                $cordovaToast.showShortCenter('用户名或密码错误!');
+                CommentUtils.t.showToast('用户名或密码错误!');
               }
             }
           });

@@ -5,14 +5,6 @@
 .factory("Workloglistservice", ['$soap',
   'GlobalSetting',
   function ($soap,GlobalSetting) {
-  var dataList = [];
-  var MaxTime;
-
-  var totalCount = 0;
-  var countCount = 0;
-
-
-
 
   return {
     /**

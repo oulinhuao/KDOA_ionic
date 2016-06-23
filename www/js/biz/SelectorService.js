@@ -6,16 +6,17 @@ angular.module('starter.SelectorService',['angularSoap',
   'ngCordova',
   'ionic',
   'starter.globalservice',
-  'starter.WorklogService'])
+  'starter.WorklogService',
+  'starter.CommentUtilsService'])
 
   .factory("SelectorService", [
     '$soap',
-    '$cordovaToast',
     '$ionicModal',
     'GlobalSetting',
     'WorklogService',
     '$ionicScrollDelegate',
-    function($soap,$cordovaToast,$ionicModal,GlobalSetting,WorklogService,$ionicScrollDelegate){
+    'CommentUtils',
+    function($soap,$ionicModal,GlobalSetting,WorklogService,$ionicScrollDelegate,CommentUtils){
       var workLogScore;// 上面传过来的区间引用
 
       var _data = {
@@ -75,7 +76,7 @@ angular.module('starter.SelectorService',['angularSoap',
             WorklogService.getWorkTypeList(0).then(function (response) {
               _data.mIsCanShowLoadin = false;
               if (response == '-1' || response == '' || response == 'undefined' || response == null) {
-                $cordovaToast.showShortCenter('用户名或密码错误!');
+                CommentUtils.t.showToast('用户名或密码错误!');
               } else {
                 ctrl.mWorkTypeList = [];
                 var data = JSON.parse(response);
@@ -124,7 +125,7 @@ angular.module('starter.SelectorService',['angularSoap',
             WorklogService.getProjList(0).then(function (response) {
               _data.mIsCanShowLoadin = false;
               if (response == '-1' || response == '' || response == 'undefined' || response == null) {
-                $cordovaToast.showShortCenter('用户名或密码错误!');
+                CommentUtils.t.showToast('用户名或密码错误!');
               } else {
                 ctrl.mProjList = [];
                 var data = JSON.parse(response);
@@ -190,7 +191,7 @@ angular.module('starter.SelectorService',['angularSoap',
           }
         },
         onItemClick:function(entity){
-          workLogScore.closeModal();
+          ctrl.closeModal();
           switch (entity.Type){
             case 0:// 选中部门
               var lastId = ctrl.mDeptId;
@@ -224,19 +225,8 @@ angular.module('starter.SelectorService',['angularSoap',
               }
               break;
           }
-        }
-      };
-
-      var _modal = function ($scope) {
-        workLogScore = $scope;
-        var modal = $ionicModal.fromTemplateUrl('templates/modal_list_selector.html',{
-          scope:$scope,
-          animation:'slide-in-up'
-        }).then(function (modal) {
-          $scope.modal = modal;
-          return modal
-        });
-        $scope.openModal = function (type) {
+        },
+        openModal : function (type) {
           switch(type){
             case 0:
               ctrl.getDept();
@@ -248,11 +238,24 @@ angular.module('starter.SelectorService',['angularSoap',
               ctrl.getProj();
               break;
           }
-          $scope.modal.show();
-        };
-        $scope.closeModal = function () {
-          $scope.modal.hide();
-        };
+          workLogScore.modal.show();
+        },
+        closeModal : function () {
+          workLogScore.modal.hide();
+        }
+
+      };
+
+      var _modal = function ($scope) {
+        workLogScore = $scope;
+        var modal = $ionicModal.fromTemplateUrl('templates/modal_list_selector.html',{
+          scope:$scope,
+          animation:'slide-in-up'
+        }).then(function (modal) {
+          $scope.modal = modal;
+          return modal
+        });
+
         $scope.$on('$destroy', function () {
           $scope.modal.remove();
         });

@@ -16,6 +16,7 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.databaseservice',
   'starter.globalservice',
   'starter.DatePickerService',
+  'starter.CommentUtilsService',
 
   'starter.MainController',
   'starter.UserInfoController',
@@ -47,10 +48,11 @@ angular.module('starter', ['ionic', 'ngCordova',
     'GlobalSetting',
     'DBHelper',
     '$cordovaFile',
+    '$window',
     function ($ionicPlatform, $rootScope, $location,
               $timeout, $ionicHistory,
               $cordovaToast, $cordovaKeyboard,
-              GlobalSetting,DBHelper,$cordovaFile) {
+              GlobalSetting,DBHelper,$cordovaFile,$window) {
       $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -102,18 +104,22 @@ angular.module('starter', ['ionic', 'ngCordova',
             return false;
           }, 101); //不回退页面（优先级100）
 
-
-          db = DBHelper.opendb("Android");
+          if(undefined !== $window.sqlitePlugin){
+            db = DBHelper.opendb("Android");
+          }
         } else if (ionic.Platform.isIOS()) { // ios设备
-          db = DBHelper.opendb("iOS");
+          if(undefined !== $window.sqlitePlugin){
+            db = DBHelper.opendb("iOS");
+          }
         }
+        if(undefined !== $window.sqlitePlugin){
+          // 测试
+          //DBHelper.dropTable();
+          // 测试结束
 
-        // 测试
-        //DBHelper.dropTable();
-        // 测试结束
-
-        // create table
-        DBHelper.createTable();
+          // create table
+          DBHelper.createTable();
+        }
 
       });
     }
