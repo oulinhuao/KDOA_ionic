@@ -12,7 +12,7 @@ angular.module('starter.CommentUtilsService',
     '$ionicLoading',
     function ($window,$cordovaNetwork,$cordovaToast,$ionicLoading) {
 
-      return ctrl = {
+      var ctrl = {
         /**
          * toast相关
          */
@@ -20,16 +20,16 @@ angular.module('starter.CommentUtilsService',
           /**
            * 底部弹出toast
            * @param str 文字内容
-           * @param position 位置 t 顶部；c 中间。默认底部
+           * @param position 位置 "t" 顶部；"c" 中间。默认底部
              */
           showToast:function(str,position){
             if($window.plugins){
               if(position){
                 switch(position){
-                  case t:
+                  case "t":
                     $cordovaToast.showShortTop(str);
                     break;
-                  case c:
+                  case "c":
                     $cordovaToast.showShortCenter(str);
                     break;
                 }
@@ -109,5 +109,7 @@ angular.module('starter.CommentUtilsService',
             return ctrl.l.isShow;
           }
         },
-      }
+      };
+
+      return ctrl;
   }]);
