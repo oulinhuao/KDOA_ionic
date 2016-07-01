@@ -13,6 +13,9 @@
     $scope.goWorklog = function(){
       $state.go('worklog');
     }
+    $scope.goRes = function(){
+      $state.go('res_category');
+    }
 
 
 }])

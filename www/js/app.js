@@ -27,7 +27,8 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.WorklogEditController',
   'starter.workloglistcontroller',
   'starter.SelectorController',
-  'starter.SelectorService'
+  'starter.SelectorService',
+  'starter.ResCategoryController'
   ])
 
 
@@ -204,6 +205,13 @@ angular.module('starter', ['ionic', 'ngCordova',
           },
           templateUrl: 'templates/worklog_detial_edit.html',
           controller: 'WorklogEditCtrl'
+        })
+
+        .state('res_category', {
+          cache: false,
+          url: '/res_category',
+          templateUrl: 'templates/res_category.html',
+          controller: 'ResCategoryCtrl'
         })
 
 
