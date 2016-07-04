@@ -28,7 +28,8 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.workloglistcontroller',
   'starter.SelectorController',
   'starter.SelectorService',
-  'starter.ResCategoryController'
+  'starter.ResCategoryController',
+  'starter.ResService'
   ])
 
 
