@@ -78,9 +78,14 @@
             }
           }
         });
+      },
+
+      goResList:function(entity){
+        $state.go('res_list',{Entity:entity});
       }
 
     }
+
 
 
 

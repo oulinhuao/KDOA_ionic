@@ -13,12 +13,12 @@
 
     <div class="row res" ng-repeat="entity in ctrl.list">
       <div class="col col-50">
-        <div class="row-content">
+        <div class="row-content" ng-click="ctrl.goResList(entity.left)">
           {{entity.left.Name}}
         </div>
       </div>
       <div class="col col-50">
-        <div class="row-content"  ng-show="entity.right.Name != '' ">
+        <div class="row-content"  ng-show="entity.right.Name != '' " ng-click="ctrl.goResList(entity.right)">
           {{entity.right.Name}}</div>
       </div>
     </div>
