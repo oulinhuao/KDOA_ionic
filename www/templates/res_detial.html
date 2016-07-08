@@ -3,7 +3,7 @@
   <ion-header-bar align-title="center" class="bar-positive bar bar-header disable-user-behavior">
     <button class=" button buttons button-icon ion-arrow-left-c header-item"
             ng-click="$ionicGoBack()"></button>
-    <h1 class="title">{{mTitle}}</h1>
+    <h1 class="title">{{mEntity.Title}}</h1>
   </ion-header-bar>
 
   <ion-content scroll="true" >
@@ -11,12 +11,6 @@
       <ion-spinner icon="android"></ion-spinner>
     </div>
 
-    <ion-list style="margin: 2px 0 ;">
-      <ion-item ng-repeat="entity in ctrl.list"
-                ng-click="onItemClick(entity)">
-        <h2>{{entity.Title}}</h2>
-        <p>作者：{{entity.Author}}</p>
-      </ion-item>
-    </ion-list>
+    <p style="padding: 10px;" ng-bind-html='mContent'></p>
   </ion-content>
 </ion-view>

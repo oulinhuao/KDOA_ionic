@@ -30,17 +30,6 @@
 
       // 当前$scope作用域
     $scope.ctrl = {
-      // 当前页码
-      currentPage: 1,
-      // 是否还有数据
-      noMoreData: false,
-      // 数据集
-      list: [],
-      listDisp: [],
-      allCount : 0,
-      currentCount : 0,
-      index : 1,
-      isFrist:true,
 
       reset: function(){
         $scope.ctrl.currentPage = 1;
@@ -80,40 +69,20 @@
             var objDataList = objResponse.pageData;
             var size = objDataList.length;
             $scope.ctrl.currentCount += size;
-            var l = [];
             for (var n = 0; n < size; n++) {
               var obj = objDataList[n];
-              if(!obj.IsDeleted){
-                var entity = {
-                  ServerId:obj.ServerId,
-                  Title : obj.Title,
-                  KeyWord : obj.KeyWord,
-                  CategoryId : obj.CategoryId,
-                  CategoryName : obj.CategoryName,
-                  ViewCount : obj.ViewCount,
-                  Content : obj.Content,
-                  Author : obj.Author,
-                  UserId : obj.UserId,
-                  UserName : obj.UserName,
-                  WorkDate : obj.WorkDate,
-                  CreateTime : obj.CreateTime,
-                  IsDeleted : obj.IsDeleted,
-                  UpdateTime : obj.UpdateTime,
-                  HtmlFileUrl : obj.HtmlFileUrl,
-                  ContentImages : obj.ContentImages,
-                  Attachments : obj.Attachments};
-                $scope.ctrl.list.push(entity);
+              if(!obj.IsDeleted && obj.CategoryId == $scope.mCurrentId){
+                $scope.ctrl.list.push(obj);
               }
             }
-
             $scope.$broadcast('scroll.refreshComplete');
           }
         });
       },
-      getDispData:function(){
-        $scope.mEntity
-      }
 
+    };
+    $scope.onItemClick=function(entity){
+      $state.go('res_detial',{Entity:entity});
     };
 
     $scope.ctrl.init();

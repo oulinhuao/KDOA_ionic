@@ -30,7 +30,8 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.SelectorService',
   'starter.ResCategoryController',
   'starter.ResService',
-  'starter.ResListController'
+  'starter.ResListController',
+  'starter.ResDetialController'
   ])
 
 
@@ -210,7 +211,7 @@ angular.module('starter', ['ionic', 'ngCordova',
         })
 
         .state('res_category', {
-          cache: false,
+          cache: true,
           url: '/res_category',
           templateUrl: 'templates/res_category.html',
           controller: 'ResCategoryCtrl'
@@ -224,6 +225,16 @@ angular.module('starter', ['ionic', 'ngCordova',
             'Entity': null
           },
           controller:'ResListCtrl'
+        })
+
+        .state('res_detial',{
+          cache:false,
+          url:'/res_detial',
+          templateUrl:'templates/res_detial.html',
+          params: {
+            'Entity': null
+          },
+          controller:'ResDetialCtrl'
         })
 
 

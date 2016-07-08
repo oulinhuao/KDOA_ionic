@@ -27,7 +27,15 @@
       return $soap.post(GlobalSetting.getUrlBusiness(), "GetInfoListPaged", {
         updateTime:"2001-1-1",
         pageIndex: index,
-        pageSize: 999999,
+        pageSize: GlobalSetting.getServerPageSize,
+        userId: GlobalSetting.getUserId(),
+        token: GlobalSetting.getUserToken(),
+      });
+    },
+    getContentById: function (id) {
+      return $soap.post(GlobalSetting.getUrlBusiness(), "GetInfoById", {
+        infoId: id,
+        mobilePath: "http://kingdonsoft.com:8003/KDOA/UploadFiles/Info/image/",
         userId: GlobalSetting.getUserId(),
         token: GlobalSetting.getUserToken(),
       });

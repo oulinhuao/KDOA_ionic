@@ -2,7 +2,7 @@
 
   <ion-header-bar align-title="center" class="bar-positive bar bar-header disable-user-behavior">
     <button class=" button buttons button-icon ion-arrow-left-c header-item"
-            ng-click="$ionicGoBack()"></button>
+            ng-click="goBack()"></button>
     <h1 class="title">信息资源</h1>
   </ion-header-bar>
 
@@ -10,18 +10,25 @@
     <div id="layout_loading_frist" ng-show="ctrl.isFrist">
       <ion-spinner icon="android"></ion-spinner>
     </div>
-
-    <div class="row res" ng-repeat="entity in ctrl.list">
+<!--  -->
+    <div class="row res" ng-repeat="entity in ctrl.list" ng-show="mIsCate">
       <div class="col col-50">
-        <div class="row-content" ng-click="ctrl.goResList(entity.left)">
+        <div class="row-content" ng-click="ctrl.onItemClicked(entity.left)">
           {{entity.left.Name}}
         </div>
       </div>
       <div class="col col-50">
-        <div class="row-content"  ng-show="entity.right.Name != '' " ng-click="ctrl.goResList(entity.right)">
+        <div class="row-content"  ng-show="entity.right.Name != '' " ng-click="ctrl.onItemClicked(entity.right)">
           {{entity.right.Name}}</div>
       </div>
     </div>
+
+    <ion-list ng-hide="mIsCate">
+      <ion-item ng-repeat="entity in ctrl.list2"
+                ng-click="ctrl.onItemClicked(entity)">
+        <a>{{entity.Name}}</a>
+      </ion-item>
+    </ion-list>
 
   </ion-content>
 </ion-view>
