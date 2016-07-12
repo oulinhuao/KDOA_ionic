@@ -3,9 +3,8 @@
   'starter.SelectorService'])
 
 .controller('SelectorCtrl', ['$scope',
-  'WorklogService',
   'SelectorService',
-  function ($scope,WorklogService,SelectorService) {
+  function ($scope,SelectorService) {
 
     $scope.mSelectorService = SelectorService;
 

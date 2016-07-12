@@ -31,7 +31,9 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.ResCategoryController',
   'starter.ResService',
   'starter.ResListController',
-  'starter.ResDetialController'
+  'starter.ResDetialController',
+  'starter.ResAttachmentController',
+  'starter.ResAttachmentService'
   ])
 
 
@@ -165,7 +167,7 @@ angular.module('starter', ['ionic', 'ngCordova',
 
         .state('worklog', {
           url: '/worklog',
-          templateUrl: 'templates/worklog.html',
+          templateUrl: 'templates/worklog/worklog.html',
           controller: 'WorklogCtrl'
         })
 
@@ -175,7 +177,7 @@ angular.module('starter', ['ionic', 'ngCordova',
           cache: false,
           views: {
             'worklog-list': {
-              templateUrl: 'templates/worklog_list.html',
+              templateUrl: 'templates/worklog/worklog_list.html',
               controller: 'WorklogListCtrl'
             }
           }
@@ -184,7 +186,7 @@ angular.module('starter', ['ionic', 'ngCordova',
           url: '/analysis',
           views: {
             'worklog-analysis':{
-              templateUrl: 'templates/worklog_analysis.html',
+              templateUrl: 'templates/worklog/worklog_analysis.html',
               controller: 'WorklogListCtrl'
             }
           }
@@ -196,7 +198,7 @@ angular.module('starter', ['ionic', 'ngCordova',
           params: {
             'projEntity': null
           },
-          templateUrl: 'templates/worklog_detial.html',
+          templateUrl: 'templates/worklog/worklog_detial.html',
           controller: 'WorklogDetialCtrl'
         })
 
@@ -206,21 +208,21 @@ angular.module('starter', ['ionic', 'ngCordova',
           params: {
             'projEntity': null
           },
-          templateUrl: 'templates/worklog_detial_edit.html',
+          templateUrl: 'templates/worklog/worklog_detial_edit.html',
           controller: 'WorklogEditCtrl'
         })
 
         .state('res_category', {
           cache: true,
           url: '/res_category',
-          templateUrl: 'templates/res_category.html',
+          templateUrl: 'templates/res/res_category.html',
           controller: 'ResCategoryCtrl'
         })
 
         .state('res_list',{
           cache:false,
           url:'/res_list',
-          templateUrl:'templates/res_list.html',
+          templateUrl:'templates/res/res_list.html',
           params: {
             'Entity': null
           },
@@ -230,7 +232,7 @@ angular.module('starter', ['ionic', 'ngCordova',
         .state('res_detial',{
           cache:false,
           url:'/res_detial',
-          templateUrl:'templates/res_detial.html',
+          templateUrl:'templates/res/res_detial.html',
           params: {
             'Entity': null
           },

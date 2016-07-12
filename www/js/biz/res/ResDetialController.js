@@ -2,7 +2,8 @@
   'ngCordova',
   'ionic',
   'starter.CommentUtilsService',
-  'starter.ResService'
+  'starter.ResService',
+  'starter.ResAttachmentService'
   ])
 
 .controller('ResDetialCtrl', ['$scope',
@@ -12,14 +13,23 @@
   'CommentUtils',
   'ResService',
   '$stateParams',
-  function ($scope,$state,$ionicPlatform,$ionicHistory,CommentUtils,ResService,$stateParams) {
+  'ResAttachmentService',
+  function ($scope,$state,$ionicPlatform,$ionicHistory,CommentUtils,ResService,$stateParams,
+            ResAttachmentService) {
+    ResAttachmentService.mInitModal($scope);
+
     $scope.mEntity = $stateParams.Entity;
     $scope.mContent = "";
+    $scope.mHasAttachments = false;
 
     // android 返回按钮
     $ionicPlatform.onHardwareBackButton(function(){
       $scope.goBack();
     });
+
+    $scope.openAttachments = function(){
+      ResAttachmentService.mListCtrl.showAttachments($scope.mEntity.Attachments);
+    };
 
     $scope.ctrl = {
       isFrist:true,
@@ -34,7 +44,16 @@
             CommentUtils.t.showToast("您还没有登录...");
           }else{
             $scope.mEntity = JSON.parse(response);
-            $scope.mContent = $scope.mEntity.Content;
+            if($scope.mEntity != null && $scope.mEntity != undefined ){
+              if($scope.mEntity.Attachments != undefined){
+                if($scope.mEntity.Attachments instanceof Array && $scope.mEntity.Attachments.length > 0){
+                  $scope.mHasAttachments = true;
+                }
+              }
+              $scope.mContent = $scope.mEntity.Content;
+            }
+
+
           }
         });
       },

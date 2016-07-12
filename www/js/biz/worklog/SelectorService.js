@@ -248,7 +248,7 @@ angular.module('starter.SelectorService',['angularSoap',
 
       var _modal = function ($scope) {
         workLogScore = $scope;
-        var modal = $ionicModal.fromTemplateUrl('templates/modal_list_selector.html',{
+        var modal = $ionicModal.fromTemplateUrl('templates/worklog/modal_list_selector.html',{
           scope:$scope,
           animation:'slide-in-up'
         }).then(function (modal) {

@@ -263,4 +263,6 @@
 .row-content-none{
   visibility: hidden;
 }
-
+.info-detial-content img{
+  width: 100%;
+}

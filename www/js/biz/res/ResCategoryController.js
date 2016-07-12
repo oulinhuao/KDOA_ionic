@@ -21,7 +21,7 @@
       if($scope.ctrl.mParents.length > 0){
         var entity = $scope.ctrl.mParents[$scope.ctrl.mParents.length - 1];
         if(entity.ServerId > 0){
-          if(entity.ParentId > 0){
+          if(entity.ParentId > 0 && !$scope.mIsCate){
             $scope.ctrl.getDispData(entity.ParentId);
           }else{
             $scope.mIsCate = true;
@@ -99,7 +99,6 @@
        * @returns {boolean} 返回列表是否切换了
          */
       getDispData:function(parentId){
-        $scope.mIsCate = false;
         var size = $scope.ctrl.listAll.length;
         var isChange = false;
         for (var n = 0; n < size; n++) {
@@ -111,6 +110,9 @@
             isChange = true;
             $scope.ctrl.list2.push(obj);
           }
+        }
+        if(isChange && $scope.mIsCate){
+          $scope.mIsCate = false;
         }
         return isChange;
       },

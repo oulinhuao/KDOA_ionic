@@ -1,0 +1,18 @@
+﻿<ion-modal-view ng-controller="ResAttachmentCtrl">
+  <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">查看附件</h1>
+    <button class="button button-clear button-primary" ng-click="modal.hide()">取消</button>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <ion-list >
+      <ion-item style="padding: 0;"
+                ng-repeat="entity in mResAttachmentService.mListCtrl.mData | orderBy:AttaName"
+                ng-click="mSelectorService.mListCtrl.onItemClick(entity)">
+        <div class="item-content">
+          {{entity.AttaName}}
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>

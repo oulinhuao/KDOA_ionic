@@ -1,0 +1,34 @@
+<ion-view animation="slide-left-right"  >
+
+  <ion-header-bar align-title="center" class="bar-positive bar bar-header disable-user-behavior">
+    <button class=" button buttons button-icon ion-arrow-left-c header-item"
+            ng-click="$ionicGoBack()"></button>
+    <h1 class="title">信息详情</h1>
+  </ion-header-bar>
+
+  <ion-content scroll="true" style="margin-bottom: 10px;">
+    <div id="layout_loading_frist" ng-show="ctrl.isFrist">
+      <ion-spinner icon="android"></ion-spinner>
+    </div>
+
+    <div scroll="true" style="margin: 10px;border: 1px solid #aaaaa2;">
+      <div style="background-color: #ededd3;padding: 10px;">
+        <h4 style="width: 100%;text-align: center">{{mEntity.Title}}</h4>
+        <a style="float: right;">{{mEntity.UpdateTime.substr(0,9)}}</a>
+        <a>作者：{{mEntity.Author}}</a>
+        <a>，{{mEntity.ViewCount}} 次查看</a>
+
+      </div>
+      <div style="padding: 10px;border-top: 1px solid #aaaaa2;overflow-y: auto;">
+        <p class="info-detial-content" ng-bind-html='mContent'></p>
+      </div>
+
+    </div>
+  </ion-content>
+
+  <a style="position: fixed;right: 10px;margin-top: 10px;"
+     class="button button-icon icon ion-android-attach has-header"
+    ng-show="mHasAttachments"
+    ng-click="openAttachments()"></a>
+
+</ion-view>
