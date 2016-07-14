@@ -8,6 +8,7 @@ angular.module('starter.globalservice', [])
     attachPrefixUrl, //附件路径前缀
     localPath,// 存储设备根目录
     localRootPath, // 本地存储根目录
+    localCachePath, // 本地存储缓存根目录
     localTxtPath; // 本地存储文本文件目录;
 
   var UserId;
@@ -50,6 +51,10 @@ angular.module('starter.globalservice', [])
     setUrlUser: function(url) {
       UrlUser = url;
     },
+    /**
+     * 获取系统存储根目录
+     * @returns {*}
+       */
     getLocalPath: function() {
       return localPath;
     },
@@ -58,6 +63,15 @@ angular.module('starter.globalservice', [])
     },
     getLocalRootPath: function() {
       return localRootPath;
+    },
+    getLocalRootPathWhole: function() {
+      return this.getLocalPath() + this.getLocalRootPath();
+    },
+    getLocalCachePath: function() {
+      return localCachePath;
+    },
+    getLocalCachePathWhole: function() {
+      return this.getLocalRootPathWhole() + "/" + this.getLocalCachePath();
     },
     setLocalRootPath: function(path) {
       localRootPath = path;
@@ -98,7 +112,8 @@ angular.module('starter.globalservice', [])
       maxRecordValue = 200;
       UrlBusiness = "http://kingdonsoft.com:8003/KDOA/webservice/mobile.asmx";
       UrlUser = "http://kingdonsoft.com:8003/KDOAWeb/webservice/mobile.asmx";
-      localRootPath = "KDOA";
+      localRootPath = "KDOA_Ionic";
+      localCachePath = "cache";
       localTxtPath = "txt";
     }
   }

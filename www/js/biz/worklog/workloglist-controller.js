@@ -4,7 +4,7 @@
   'DialogService',
   'ionic',
   'starter.WorklogService',
-  'starter.CommentUtilsService'])
+  'starter.NativeUtilsService'])
 
 .controller('WorklogListCtrl', ['$scope',
   '$state',
@@ -14,10 +14,10 @@
   'DialogUtil',
   'WorklogService',
   '$ionicListDelegate',
-  'CommentUtils',
+  'NativeUtils',
   function ($scope, $state, $timeout,
             Workloglistservice,DateUtils,DialogUtil,
-            WorklogService,$ionicListDelegate,CommentUtils) {
+            WorklogService,$ionicListDelegate,NativeUtils) {
     var mDateUtils = DateUtils;
     // 当前$scope作用域
     $scope.ctrl = {
@@ -52,7 +52,7 @@
        */
       doRefresh: function () {
         $scope.ctrl.noMoreData = true;
-        if (!CommentUtils.n.isOnline(true)) {
+        if (!NativeUtils.n.isOnline(true)) {
           $scope.ctrl.isFrist = false;
           $scope.$broadcast('scroll.refreshComplete');
             return;
@@ -66,9 +66,9 @@
            */
           var callback = function(flag){
             if(flag == -1){
-              CommentUtils.t.showToast("访问异常...");
+              NativeUtils.t.showToast("访问异常...");
             }else if(flag == 0){
-              CommentUtils.t.showToast("没有更多...");
+              NativeUtils.t.showToast("没有更多...");
             }
           };
 
@@ -76,7 +76,7 @@
             $scope.ctrl.isFrist = false;
             if("InvaildToken" === response){
               // 需要登录
-              CommentUtils.t.showToast("您还没有登录...");
+              NativeUtils.t.showToast("您还没有登录...");
               $scope.$broadcast('scroll.refreshComplete');
             }else{
               var objResponse = JSON.parse(response);
@@ -111,14 +111,14 @@
        * 加载更多
        */
       doLoadMore:function(){
-        if (!CommentUtils.n.isOnline(true)) {
+        if (!NativeUtils.n.isOnline(true)) {
           return;
         }
 
         var successCallback = function(response){
           if("InvaildToken" === response){
             // 需要登录
-            CommentUtils.t.showToast("您还没有登录...");
+            NativeUtils.t.showToast("您还没有登录...");
             $scope.$broadcast('scroll.refreshComplete');
           }else{
             var objResponse = JSON.parse(response);
@@ -161,12 +161,12 @@
       doDelete: function(index){
         DialogUtil.dialogConfirm('','确定删除这条数据？').then(function(res){
           if(res) {
-            CommentUtils.l.showLoading();
+            NativeUtils.l.showLoading();
             WorklogService.deleteWorklog($scope.ctrl.list[index]).then(function(response){
-              CommentUtils.l.hideLoading();
+              NativeUtils.l.hideLoading();
               if("InvaildToken" === response){
                 // 需要登录
-                CommentUtils.t.showToast("您的帐号在其他设备登录，请重新登录");
+                NativeUtils.t.showToast("您的帐号在其他设备登录，请重新登录");
               }else {
                 // 成功 返回的是时间字符串 yyyy-MM-dd hh:mm:ss
                 if(response != undefined && response.length > 4){
@@ -174,7 +174,7 @@
                   return;
                 }
               }
-              CommentUtils.t.showToast("删除失败");
+              NativeUtils.t.showToast("删除失败");
             });
           } else {
             //alert("取消");

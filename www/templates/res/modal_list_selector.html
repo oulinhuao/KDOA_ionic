@@ -8,7 +8,7 @@
     <ion-list >
       <ion-item style="padding: 0;"
                 ng-repeat="entity in mResAttachmentService.mListCtrl.mData | orderBy:AttaName"
-                ng-click="mSelectorService.mListCtrl.onItemClick(entity)">
+                ng-click="onItemClick(entity)">
         <div class="item-content">
           {{entity.AttaName}}
         </div>

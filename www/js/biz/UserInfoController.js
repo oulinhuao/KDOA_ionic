@@ -2,16 +2,16 @@ angular.module('starter.UserInfoController', [
   'ngCordova',
   'starter.globalservice',
   'starter.UserInfoService',
-  'starter.CommentUtilsService'])
+  'starter.NativeUtilsService'])
 
   .controller('UserInfoCtrl',['$scope',
     '$state',
     'UserInfoService',
     'GlobalSetting',
     '$timeout',
-    'CommentUtils',
+    'NativeUtils',
     function ($scope, $state,
-              UserInfoService, GlobalSetting,$timeout,CommentUtils) {
+              UserInfoService, GlobalSetting,$timeout,NativeUtils) {
       $scope.loginData = {username:'',password:''};
       $scope.loadingShow = false;
       $scope.loginText = "登录";
@@ -29,15 +29,15 @@ angular.module('starter.UserInfoController', [
           var pwd = $scope.loginData.password;
           // 必须输入验证
           if (typeof(name) == "undefined" || name.length == 0) {
-            CommentUtils.t.showToast('用户名必须输入!');
+            NativeUtils.t.showToast('用户名必须输入!');
             return false;
           }
           if (typeof(pwd) == "undefined" || pwd.length == 0) {
-            CommentUtils.t.showToast('密码必须输入!');
+            NativeUtils.t.showToast('密码必须输入!');
             return false;
           }
 
-          if(!CommentUtils.n.isOnline(true)){
+          if(!NativeUtils.n.isOnline(true)){
             return;
           }
 
@@ -49,7 +49,7 @@ angular.module('starter.UserInfoController', [
             $scope.loadingShow = false;
 
             if (response == '-1' || response == '' || response == 'undefined' || response == null) {
-              CommentUtils.t.showToast('用户名或密码错误!');
+              NativeUtils.t.showToast('用户名或密码错误!');
             } else {
               var info = JSON.parse(response);
               if(info.ServerId > 0){
@@ -61,7 +61,7 @@ angular.module('starter.UserInfoController', [
               }else{
                 // 未知错误
                 $scope.loginText = "登录";
-                CommentUtils.t.showToast('用户名或密码错误!');
+                NativeUtils.t.showToast('用户名或密码错误!');
               }
             }
           });

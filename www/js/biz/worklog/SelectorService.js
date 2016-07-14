@@ -7,7 +7,7 @@ angular.module('starter.SelectorService',['angularSoap',
   'ionic',
   'starter.globalservice',
   'starter.WorklogService',
-  'starter.CommentUtilsService'])
+  'starter.NativeUtilsService'])
 
   .factory("SelectorService", [
     '$soap',
@@ -15,8 +15,8 @@ angular.module('starter.SelectorService',['angularSoap',
     'GlobalSetting',
     'WorklogService',
     '$ionicScrollDelegate',
-    'CommentUtils',
-    function($soap,$ionicModal,GlobalSetting,WorklogService,$ionicScrollDelegate,CommentUtils){
+    'NativeUtils',
+    function($soap,$ionicModal,GlobalSetting,WorklogService,$ionicScrollDelegate,NativeUtils){
       var workLogScore;// 上面传过来的区间引用
 
       var _data = {
@@ -76,7 +76,7 @@ angular.module('starter.SelectorService',['angularSoap',
             WorklogService.getWorkTypeList(0).then(function (response) {
               _data.mIsCanShowLoadin = false;
               if (response == '-1' || response == '' || response == 'undefined' || response == null) {
-                CommentUtils.t.showToast('用户名或密码错误!');
+                NativeUtils.t.showToast('用户名或密码错误!');
               } else {
                 ctrl.mWorkTypeList = [];
                 var data = JSON.parse(response);
@@ -125,7 +125,7 @@ angular.module('starter.SelectorService',['angularSoap',
             WorklogService.getProjList(0).then(function (response) {
               _data.mIsCanShowLoadin = false;
               if (response == '-1' || response == '' || response == 'undefined' || response == null) {
-                CommentUtils.t.showToast('用户名或密码错误!');
+                NativeUtils.t.showToast('用户名或密码错误!');
               } else {
                 ctrl.mProjList = [];
                 var data = JSON.parse(response);

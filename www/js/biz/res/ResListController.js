@@ -1,7 +1,7 @@
 ﻿angular.module('starter.ResListController',[
   'ngCordova',
   'ionic',
-  'starter.CommentUtilsService',
+  'starter.NativeUtilsService',
   'starter.ResService'
   ])
 
@@ -10,10 +10,10 @@
   '$stateParams',
   '$ionicPlatform',
   '$ionicHistory',
-  'CommentUtils',
+  'NativeUtils',
   'ResService',
   function ($scope,$state,$stateParams,
-    $ionicPlatform,$ionicHistory,CommentUtils,ResService) {
+    $ionicPlatform,$ionicHistory,NativeUtils,ResService) {
     // android 返回按钮
     $ionicPlatform.onHardwareBackButton(function(){
       $ionicHistory.goBack();
@@ -50,7 +50,7 @@
        */
       doRefresh: function () {
         $scope.ctrl.noMoreData = true;
-        if (!CommentUtils.n.isOnline(true)) {
+        if (!NativeUtils.n.isOnline(true)) {
           $scope.ctrl.isFrist = false;
           $scope.$broadcast('scroll.refreshComplete');
           return;
@@ -61,7 +61,7 @@
           $scope.ctrl.isFrist = false;
           if("InvaildToken" === response){
             // 需要登录
-            CommentUtils.t.showToast("您还没有登录...");
+            NativeUtils.t.showToast("您还没有登录...");
             $scope.$broadcast('scroll.refreshComplete');
           }else{
             var objResponse = JSON.parse(response);

@@ -16,7 +16,8 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.databaseservice',
   'starter.globalservice',
   'starter.DatePickerService',
-  'starter.CommentUtilsService',
+  'starter.commonutils',
+  'starter.NativeUtilsService',
 
   'starter.MainController',
   'starter.UserInfoController',
@@ -114,6 +115,7 @@ angular.module('starter', ['ionic', 'ngCordova',
             db = DBHelper.opendb("Android");
           }
         } else if (ionic.Platform.isIOS()) { // ios设备
+          GlobalSetting.setLocalPath(cordova.file.dataDirectory);
           if(undefined !== $window.sqlitePlugin){
             db = DBHelper.opendb("iOS");
           }

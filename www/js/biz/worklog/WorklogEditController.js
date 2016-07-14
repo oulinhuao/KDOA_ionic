@@ -5,7 +5,7 @@
   'starter.SelectorService',
   'starter.DatePickerService',
   'ionic',
-  'starter.CommentUtilsService'
+  'starter.NativeUtilsService'
 ])
 
 .controller('WorklogEditCtrl', ['$scope',
@@ -18,10 +18,10 @@
   '$ionicHistory',
   '$cordovaDatePicker',
   'DatePickerService',
-  'CommentUtils',
+  'NativeUtils',
   function ($scope,$filter, $state,$stateParams,DateUtils,
             WorklogService,SelectorService,$ionicHistory,$cordovaDatePicker,
-            DatePickerService,CommentUtils) {
+            DatePickerService,NativeUtils) {
     $scope.mEntity = $stateParams.projEntity;
     if($scope.mEntity == null){
       $scope.mEntity = {
@@ -65,63 +65,63 @@
       submitSave:function(){
         if($scope.mEntity != null){
           if($scope.mEntity.CompId == 0){
-            CommentUtils.t.showToast("请选择所属部门");
+            NativeUtils.t.showToast("请选择所属部门");
             return;
           }
           if($scope.mEntity.ProjId == 0){
-            CommentUtils.t.showToast("请选择所属项目");
+            NativeUtils.t.showToast("请选择所属项目");
             return;
           }
           if($scope.mEntity.WorkTypeId == 0){
-            CommentUtils.t.showToast("请选择工作类型");
+            NativeUtils.t.showToast("请选择工作类型");
             return;
           }
           if($scope.mEntity.WorkHour <= 0){
-            CommentUtils.t.showToast("请填写工作时长");
+            NativeUtils.t.showToast("请填写工作时长");
             return;
           }
           if($scope.mEntity.WorkHour <= 0 || $scope.mEntity.WorkHour >= 24){
-            CommentUtils.t.showToast("工作时长范围有误");
+            NativeUtils.t.showToast("工作时长范围有误");
             return;
           }
           if($scope.mEntity.WorkContent.length == 0){
-            CommentUtils.t.showToast("请填写工作内容");
+            NativeUtils.t.showToast("请填写工作内容");
             return;
           }
 
-          CommentUtils.l.showLoading();
+          NativeUtils.l.showLoading();
           if($scope.mEntity.ServerId == 0){
             WorklogService.addWorklogByEntity($scope.mEntity).then(function(response){
-              CommentUtils.l.hideLoading();
+              NativeUtils.l.hideLoading();
               if("InvaildToken" === response){
                 // 需要登录
-                CommentUtils.t.showToast("您的帐号在其他设备登录，请重新登录");
+                NativeUtils.t.showToast("您的帐号在其他设备登录，请重新登录");
               }else {
                 var objResponse = JSON.parse(response);
                 if(objResponse != undefined && objResponse.ServerId != undefined && objResponse.ServerId > 0){
-                  CommentUtils.t.showToast("添加成功");
+                  NativeUtils.t.showToast("添加成功");
                   //TODO 成功
                   $ionicHistory.goBack();
                   return;
                 }
               }
-              CommentUtils.t.showToast("添加失败");
+              NativeUtils.t.showToast("添加失败");
             });
           }else{
             WorklogService.updateWorklogByEntity($scope.mEntity).then(function(response){
-              CommentUtils.l.hideLoading();
+              NativeUtils.l.hideLoading();
               if("InvaildToken" === response){
                 // 需要登录
-                CommentUtils.t.showToast("您的帐号在其他设备登录，请重新登录");
+                NativeUtils.t.showToast("您的帐号在其他设备登录，请重新登录");
               }else {
                 // 成功 返回的是时间字符串 yyyy-MM-dd hh:mm:ss
                 if(response != undefined && response.length > 4){
-                  //CommentUtils.t.showToast("修改成功");
+                  //NativeUtils.t.showToast("修改成功");
                   $ionicHistory.goBack();
                   return;
                 }
               }
-              CommentUtils.t.showToast("修改失败");
+              NativeUtils.t.showToast("修改失败");
             });
           }
         }

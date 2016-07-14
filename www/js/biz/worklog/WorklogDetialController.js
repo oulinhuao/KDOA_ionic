@@ -4,7 +4,7 @@
   'ionic',
   'DialogService',
   'starter.WorklogService',
-  'starter.CommentUtilsService'])
+  'starter.NativeUtilsService'])
 
 .controller('WorklogDetialCtrl', ['$scope',
   '$state',
@@ -14,10 +14,10 @@
   '$ionicActionSheet',
   'DialogUtil',
   'WorklogService',
-  'CommentUtils',
+  'NativeUtils',
   function ($scope, $state,$stateParams,
             DateUtils,$ionicHistory, $ionicActionSheet,
-            DialogUtil,WorklogService,CommentUtils
+            DialogUtil,WorklogService,NativeUtils
             ) {
     $scope.mEntity = $stateParams.projEntity;
 
@@ -36,17 +36,17 @@
           }
         },
         destructiveButtonClicked:function(){
-          if(!CommentUtils.n.isOnline(true)){
+          if(!NativeUtils.n.isOnline(true)){
             return;
           }
           DialogUtil.dialogConfirm('','确定删除这条数据？').then(function(res){
             if(res) {
-              CommentUtils.l.showLoading();
+              NativeUtils.l.showLoading();
               WorklogService.deleteWorklog(scope.list[index]).then(function(response){
-                CommentUtils.l.hideLoading();
+                NativeUtils.l.hideLoading();
                 if("InvaildToken" === response){
                   // 需要登录
-                  CommentUtils.t.showToast("您的帐号在其他设备登录，请重新登录");
+                  NativeUtils.t.showToast("您的帐号在其他设备登录，请重新登录");
                 }else {
                   // 成功 返回的是时间字符串 yyyy-MM-dd hh:mm:ss
                   if(response != undefined && response.length > 4){
@@ -54,7 +54,7 @@
                     return;
                   }
                 }
-                CommentUtils.t.showToast("删除失败");
+                NativeUtils.t.showToast("删除失败");
               });
             } else {
               hideSheet();

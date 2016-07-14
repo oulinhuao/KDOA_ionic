@@ -1,11 +1,11 @@
 /**
  * Created by Tony on 2016/6/23.
  */
-angular.module('starter.CommentUtilsService',
+angular.module('starter.NativeUtilsService',
   [ 'ngCordova',
     'ionic',])
 
-  .factory("CommentUtils", [
+  .factory("NativeUtils", [
     '$window',
     '$cordovaNetwork',
     '$cordovaToast',

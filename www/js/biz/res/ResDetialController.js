@@ -1,7 +1,7 @@
 ﻿angular.module('starter.ResDetialController',[
   'ngCordova',
   'ionic',
-  'starter.CommentUtilsService',
+  'starter.NativeUtilsService',
   'starter.ResService',
   'starter.ResAttachmentService'
   ])
@@ -10,11 +10,11 @@
   '$state',
   '$ionicPlatform',
   '$ionicHistory',
-  'CommentUtils',
+  'NativeUtils',
   'ResService',
   '$stateParams',
   'ResAttachmentService',
-  function ($scope,$state,$ionicPlatform,$ionicHistory,CommentUtils,ResService,$stateParams,
+  function ($scope,$state,$ionicPlatform,$ionicHistory,NativeUtils,ResService,$stateParams,
             ResAttachmentService) {
     ResAttachmentService.mInitModal($scope);
 
@@ -41,7 +41,7 @@
           $scope.ctrl.isFrist = false;
           if("InvaildToken" === response){
             // 需要登录
-            CommentUtils.t.showToast("您还没有登录...");
+            NativeUtils.t.showToast("您还没有登录...");
           }else{
             $scope.mEntity = JSON.parse(response);
             if($scope.mEntity != null && $scope.mEntity != undefined ){

@@ -1,7 +1,7 @@
 ﻿angular.module('starter.ResCategoryController',[
   'ngCordova',
   'ionic',
-  'starter.CommentUtilsService',
+  'starter.NativeUtilsService',
   'starter.ResService'
   ])
 
@@ -9,9 +9,9 @@
   '$state',
   '$ionicPlatform',
   '$ionicHistory',
-  'CommentUtils',
+  'NativeUtils',
   'ResService',
-  function ($scope,$state,$ionicPlatform,$ionicHistory,CommentUtils,ResService) {
+  function ($scope,$state,$ionicPlatform,$ionicHistory,NativeUtils,ResService) {
 
     // android 返回按钮
     $ionicPlatform.onHardwareBackButton(function(){
@@ -56,7 +56,7 @@
           $scope.ctrl.isFrist = false;
           if("InvaildToken" === response){
             // 需要登录
-            CommentUtils.t.showToast("您还没有登录...");
+            NativeUtils.t.showToast("您还没有登录...");
           }else{
             var objResponse = JSON.parse(response);
             var size = objResponse.length;

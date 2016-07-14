@@ -179,6 +179,44 @@ angular.module('starter.commonutils', ['ngCordova'])
       }
     },
     /**
+     * 检查文件是否存在
+     * @param path
+     * @param callbackMethod
+     */
+    checkFileIsExist: function (path, callbackMethod) {
+      if (path != undefined && path != null && path != "") {
+        var root = path.substring(0, path.lastIndexOf("/") + 1);
+        var name = path.substring(path.lastIndexOf("/") + 1);
+        $cordovaFile.checkFile(root, name).then(function (res) {
+          callbackMethod(true);
+        }, function (err) {
+          console.log(err.message);
+          callbackMethod(false);
+        });
+      } else {
+        callbackMethod(false);
+      }
+    },
+    /**
+     *
+     * @param path
+     * @param callbackMethod
+         */
+    checkDirIsExist: function(path, callbackMethod){
+      if (path != undefined && path != null && path != "") {
+        var root = path.substring(0, path.lastIndexOf("/") + 1);
+        var name = path.substring(path.lastIndexOf("/") + 1);
+        $cordovaFile.checkDir(root, name).then(function (res) {
+          callbackMethod(true);
+        }, function (err) {
+          console.log(err.message);
+          callbackMethod(false);
+        });
+      } else {
+        callbackMethod(false);
+      }
+    },
+    /**
      * js对象转为String
      * @param o
      * @returns {*}

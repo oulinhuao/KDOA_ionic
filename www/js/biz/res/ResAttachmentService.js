@@ -15,9 +15,6 @@ angular.module('starter.ResAttachmentService',[
       var ctrl = {
         mTypeName :null,
         mData : [],
-        onItemClick:function(entity){
-          ctrl.closeAttachments();
-        },
         showAttachments:function(attacments){
           if(attacments!=undefined && attacments instanceof Array){
             if(ctrl.mData.length === 0){
