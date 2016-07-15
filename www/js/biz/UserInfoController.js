@@ -2,7 +2,8 @@ angular.module('starter.UserInfoController', [
   'ngCordova',
   'starter.globalservice',
   'starter.UserInfoService',
-  'starter.NativeUtilsService'])
+  'starter.NativeUtilsService',
+  'starter.FileUtilsService'])
 
   .controller('UserInfoCtrl',['$scope',
     '$state',
@@ -10,8 +11,9 @@ angular.module('starter.UserInfoController', [
     'GlobalSetting',
     '$timeout',
     'NativeUtils',
+    'FileUtils',
     function ($scope, $state,
-              UserInfoService, GlobalSetting,$timeout,NativeUtils) {
+              UserInfoService, GlobalSetting,$timeout,NativeUtils,FileUtils) {
       $scope.loginData = {username:'',password:''};
       $scope.loadingShow = false;
       $scope.loginText = "登录";
@@ -89,6 +91,19 @@ angular.module('starter.UserInfoController', [
         });
 
       };
+
+      //$scope.test = function(){
+      //  var savePath = GlobalSetting.getLocalCachePathWhole();
+      //  var url = 'http://www.hangge.com/blog/images/logo.png';
+      //  FileUtils.createFile(savePath, "ddd.txt", function(ok){
+      //    if(ok){
+      //      console.log('ok');
+      //    }else{
+      //      console.log('失败');
+      //    }
+      //  });
+      //
+      //}
 
 
     }]);

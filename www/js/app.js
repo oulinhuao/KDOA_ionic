@@ -18,6 +18,7 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.DatePickerService',
   'starter.commonutils',
   'starter.NativeUtilsService',
+  'starter.FileUtilsService',
 
   'starter.MainController',
   'starter.UserInfoController',

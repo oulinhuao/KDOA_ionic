@@ -91,7 +91,7 @@ angular.module('starter.FileUtilsService', [
         }
       },
       /**
-       * 创建文件
+       * 创建文件(如果目录不存在 会自动创建目录)
        * @param path 文件存放路径
        * @param fileName
        * @param callBack
@@ -99,16 +99,35 @@ angular.module('starter.FileUtilsService', [
       createFile:function(path, fileName, callBack){
         ctrl.checkDirIsExist(path,function(isOK){
           if(isOK){
-            ctrl.checkFileIsExist(path+"/"+fileName,callBack);
+            ctrl.checkFileIsExist(path+"/"+fileName,function(exist){
+              if(!exist){
+                $cordovaFile.createFile(path, fileName, true)
+                  .then(function (success) {
+                    callBack(true);
+                  }, function (error) {
+                    callBack(false);
+                  });
+              }
+            });
           }else{
-            var rootEndPoint = path.lastIndexOf(GlobalSetting.getLocalPath()) + 1;
-            var root = path.substring(0,rootEndPoint);
-            var filePath = path.substring(rootEndPoint);
-
-            ctrl.recurCreateDirectory();
+            var root = GlobalSetting.getLocalPath();
+            var rootEndPoint = root.length;
+            var filePath = rootEndPoint >= 0 ? path.substring(rootEndPoint) : path;
+            ctrl.recurCreateDirectory(root,filePath,
+              function(success){
+                $cordovaFile.createFile(path, fileName, true)
+                  .then(function (success) {
+                    callBack(true);
+                  }, function (error) {
+                    callBack(false);
+                  });
+              },
+              function(error){
+                console.log("error:"+JSON.stringify(error).toString());
+                callBack(false);
+              });
           }
         });
-        ctrl.checkFileIsExist(path+"/"+fileName,callBack);
       }
     }
     return ctrl;

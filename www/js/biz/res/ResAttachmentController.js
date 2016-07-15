@@ -5,20 +5,25 @@ angular.module('starter.ResAttachmentController',[
     'ngCordova',
     'starter.ResAttachmentService',
     'starter.commonutils',
+    'starter.FileUtilsService',
     'starter.globalservice'])
 
   .controller('ResAttachmentCtrl', ['$scope',
     '$ionicModal',
     'ResAttachmentService',
     '$cordovaFile',
+    '$cordovaFileTransfer',
     'CommonUtils',
+    'FileUtils',
     'GlobalSetting',
-    function ($scope,$ionicModal,ResAttachmentService,$cordovaFile,
-              CommonUtils,GlobalSetting) {
+    function ($scope,$ionicModal,ResAttachmentService,$cordovaFile,$cordovaFileTransfer,
+              CommonUtils,FileUtils,GlobalSetting) {
       $scope.mResAttachmentService = ResAttachmentService;
 
+      $scope.pro = "";
+
       $scope.onItemClick = function(entity){
-        $scope.mResAttachmentService.mListCtrl.closeAttachments();
+        //$scope.mResAttachmentService.mListCtrl.closeAttachments();
         $scope.downloadImage();
       };
 
@@ -29,74 +34,51 @@ angular.module('starter.ResAttachmentController',[
 
         CommonUtils.checkDirIsExist(savePath,function(isOK){
           if(isOK){
-            console.log('文件夹已经存在');
             CommonUtils.checkFileIsExist(savePath + "/" + CommonUtils.getFileName(url),function(resp){
               if(resp){
-                console.log('文件已经存在');
               }else{
-                console.log('文件不存在');
+                down();
               }
             });
           }else{
-            CommonUtils.recurCreateDirectory(
-              GlobalSetting.getLocalPath(),
-              GlobalSetting.getLocalRootPath()+"/"+GlobalSetting.getLocalCachePath(),
-              function(success){
-                console.log("success:"+success.toString());
 
-                //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-                //  fs.root.getFile(savePath+"/newPersistentFile.txt", {create: true, exclusive: false},
-                //    function (fileEntry) {
-                //      console.log("success:" + fileEntry.toURL());
-                //    },
-                //    function (error) {
-                //      console.log("error:" + JSON.stringify(error).toString());
-                //    })
-                //});
-              },
-              function(error){
-                console.log("error:"+JSON.stringify(error).toString());
-              });
-            }
-          });
-
-      }
-
-      //下载文件
-      function download(fileEntry, uri) {
-        var fileTransfer = new FileTransfer();
-        var fileURL = fileEntry.toURL();
-
-        fileTransfer.download(
-          uri,
-          fileURL,
-          function (entry) {
-            console.log("下载成功！");
-            console.log("文件保存位置: " + entry.toURL());
-          },
-          function (error) {
-            console.log("下载失败！");
-            console.log("error source " + error.source);
-            console.log("error target " + error.target);
-            console.log("error code" + error.code);
-          },
-          null, // or, pass false
-          {
-            //headers: {
-            //    "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-            //}
           }
-        );
+        });
+
+        function down(){
+          var ft = new FileTransfer();
+          var uri = encodeURI(url);
+          var pathUrl = savePath+"/"+FileUtils.getFileName(url);
+          console.log('开始下载'+pathUrl);
+
+          ft.onprogress = function(progressEvent) {
+            if (progressEvent.lengthComputable) {
+              $scope.pro = "进度是：" + progressEvent.loaded / progressEvent.total;
+            } else {
+            }
+          };
+          ft.download(
+            uri,
+            pathUrl,
+            function(entry) {
+              console.log("download complete: " + entry.toURL());
+            },
+            function(error) {
+              console.log("download error source " + error.source);
+              console.log("download error target " + error.target);
+              console.log("upload error code" + error.code);
+            },
+            false,
+            {
+              headers: {
+                "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+              }
+            }
+          );
+        }
+
       }
 
-      //文件创建失败回调
-      function  onErrorCreateFile(error){
-        console.log("文件创建失败！")
-      }
 
-      //FileSystem加载失败回调
-      function  onErrorLoadFs(error){
-        console.log("文件系统加载失败！")
-      }
 
     }])

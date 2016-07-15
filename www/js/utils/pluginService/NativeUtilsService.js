@@ -109,6 +109,7 @@ angular.module('starter.NativeUtilsService',
             return ctrl.l.isShow;
           }
         },
+
       };
 
       return ctrl;
