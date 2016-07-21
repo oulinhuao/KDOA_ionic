@@ -24,7 +24,7 @@
 
     // android 返回按钮
     $ionicPlatform.onHardwareBackButton(function(){
-      $scope.goBack();
+      $ionicHistory.goBack();
     });
 
     $scope.openAttachments = function(){
@@ -60,6 +60,9 @@
 
     }
 
-
+    $scope.clickToCancle = function(){
+      //$ionicLoading.hide()
+      console.log("clickToCancle");
+    }
     $scope.ctrl.init();
 }])

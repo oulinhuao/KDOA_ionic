@@ -115,6 +115,19 @@ angular.module('starter.globalservice', [])
       localRootPath = "KDOA_Ionic";
       localCachePath = "cache";
       localTxtPath = "txt";
+    },
+    getUploadParameter:function(obj){
+      var back = "";
+      switch(typeof(obj))
+      {
+        case "string":
+        case "number":
+        case "boolean":
+        case "object":
+          back = obj == null ? "" : obj;
+          break;
+      }
+      return back;
     }
   }
 });

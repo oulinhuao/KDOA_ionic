@@ -11,9 +11,8 @@ angular.module('starter.UserInfoController', [
     'GlobalSetting',
     '$timeout',
     'NativeUtils',
-    'FileUtils',
     function ($scope, $state,
-              UserInfoService, GlobalSetting,$timeout,NativeUtils,FileUtils) {
+              UserInfoService, GlobalSetting,$timeout,NativeUtils) {
       $scope.loginData = {username:'',password:''};
       $scope.loadingShow = false;
       $scope.loginText = "登录";
@@ -22,7 +21,6 @@ angular.module('starter.UserInfoController', [
       $timeout(function() {
         $scope.getLastUser();
       },500);
-
 
       // 登录操作
       $scope.doLogin = function () {

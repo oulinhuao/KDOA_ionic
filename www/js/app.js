@@ -81,7 +81,7 @@ angular.module('starter', ['ionic', 'ngCordova',
           }
           // 注册back键事件
           $ionicPlatform.registerBackButtonAction(function (e) {
-            e.preventDefault();
+            //e.preventDefault();
 
             // 退出应用程序
             function exitApp() {
@@ -103,8 +103,7 @@ angular.module('starter', ['ionic', 'ngCordova',
               if ($cordovaKeyboard.isVisible()) {
                 $cordovaKeyboard.close();
               } else {
-                //$rootScope.$viewHistory.backView.go();
-                $ionicHistory.goBack();
+                //$ionicHistory.goBack();
               }
             } else {
               exitApp();
@@ -249,6 +248,35 @@ angular.module('starter', ['ionic', 'ngCordova',
       $urlRouterProvider.otherwise('/login');
 
     }])
+
+  .directive('progressWithValue', function () {
+    var self = {
+      scope: {
+        progressValue: "@",
+      },
+      template: '<div><ion-spinner icon="android"></ion-spinner><div style="line-height: 28px;position: absolute;margin-left:6px;display: inline-block">下载中 {{proValue}} %</div></div>',
+      priority: 100,
+      replace: true,
+      transclude: true,
+      restrict: 'E',
+      controller: ['$scope', function ($scope) {
+        $scope.proValue = "0";
+        // watch 父 controller scope对象
+        var unWatch = $scope.$parent.$watch('progressValue', function (newVal, oldVal) {
+          if (newVal >= 0) {
+            $scope.proValue = newVal;
+            // 到达100%时，取消变量监听
+            if (newVal >= 100) {
+              unWatch();
+            }
+          }
+        });
+
+
+      }]
+    };
+    return self;
+  })
 
 
 ;

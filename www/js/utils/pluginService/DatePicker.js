@@ -18,9 +18,11 @@ angular.module('starter.DatePickerService',
         cancelButtonLabel:'取消'
       },
       onSuccess:function(date) {
+        console.log(JSON.stringify(date));
       },
-      onError:function(error) {
-      },
+    onError:function(error) {
+      console.log(JSON.stringify(error));
+    },
       selectDate:function(options,sc,ec){
         $cordovaDatePicker.show(options).then(sc, ec);
       },

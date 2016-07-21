@@ -9,16 +9,22 @@
 .controller('WorklogDetialCtrl', ['$scope',
   '$state',
   '$stateParams',
+  '$ionicPlatform',
   'DateUtils',
   '$ionicHistory',
   '$ionicActionSheet',
   'DialogUtil',
   'WorklogService',
   'NativeUtils',
-  function ($scope, $state,$stateParams,
+  function ($scope, $state,$stateParams,$ionicPlatform,
             DateUtils,$ionicHistory, $ionicActionSheet,
             DialogUtil,WorklogService,NativeUtils
             ) {
+    // android 返回按钮
+    $ionicPlatform.onHardwareBackButton(function(){
+      $ionicHistory.goBack();
+    });
+
     $scope.mEntity = $stateParams.projEntity;
 
     $scope.showMenu = function(){

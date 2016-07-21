@@ -16,12 +16,19 @@
   'WorklogService',
   'SelectorService',
   '$ionicHistory',
+  '$ionicPlatform',
   '$cordovaDatePicker',
   'DatePickerService',
   'NativeUtils',
   function ($scope,$filter, $state,$stateParams,DateUtils,
-            WorklogService,SelectorService,$ionicHistory,$cordovaDatePicker,
+            WorklogService,SelectorService,$ionicHistory,$ionicPlatform,
+            $cordovaDatePicker,
             DatePickerService,NativeUtils) {
+    // android 返回按钮
+    $ionicPlatform.onHardwareBackButton(function(){
+      $ionicHistory.goBack();
+    });
+
     $scope.mEntity = $stateParams.projEntity;
     if($scope.mEntity == null){
       $scope.mEntity = {
@@ -56,6 +63,7 @@
 
     $scope.showDate=function(){
       DatePickerService.selectDate(function(date){
+        console.log(JSON.stringify(date));
         $scope.mEntity.WorkDate = $filter('date')(date.getTime(),'yyyy-MM-dd')
       });
     }
@@ -100,7 +108,6 @@
                 var objResponse = JSON.parse(response);
                 if(objResponse != undefined && objResponse.ServerId != undefined && objResponse.ServerId > 0){
                   NativeUtils.t.showToast("添加成功");
-                  //TODO 成功
                   $ionicHistory.goBack();
                   return;
                 }

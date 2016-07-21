@@ -30,12 +30,12 @@
      */
     addWorklogByEntity:function(entity){
       return $soap.post(GlobalSetting.getUrlBusiness(), "AddWorkLog", {
-        ProjId:entity.ProjId,
-        WorkDate: entity.WorkDate,
-        WorkTypeId: entity.WorkTypeId,
-        WorkHour: entity.WorkHour,
-        WorkContent: entity.WorkContent,
-        Remark: entity.Remark,
+        ProjId:GlobalSetting.getUploadParameter(entity.ProjId),
+        WorkDate: GlobalSetting.getUploadParameter(entity.WorkDate),
+        WorkTypeId: GlobalSetting.getUploadParameter(entity.WorkTypeId),
+        WorkHour: GlobalSetting.getUploadParameter(entity.WorkHour),
+        WorkContent: GlobalSetting.getUploadParameter(entity.WorkContent),
+        Remark: GlobalSetting.getUploadParameter(entity.Remark),
         userId: GlobalSetting.getUserId(),
         token: GlobalSetting.getUserToken()
       });
@@ -47,13 +47,13 @@
      */
     updateWorklogByEntity:function(entity){
       return $soap.post(GlobalSetting.getUrlBusiness(), "UpdateWorkLog", {
-        ServerId:entity.ServerId,
-        ProjId:entity.ProjId,
-        WorkDate: entity.WorkDate,
-        WorkTypeId: entity.WorkTypeId,
-        WorkHour: entity.WorkHour,
-        WorkContent: entity.WorkContent,
-        Remark: entity.Remark,
+        ServerId:GlobalSetting.getUploadParameter(entity.ServerId),
+        ProjId:GlobalSetting.getUploadParameter(entity.ProjId),
+        WorkDate: GlobalSetting.getUploadParameter(entity.WorkDate),
+        WorkTypeId: GlobalSetting.getUploadParameter(entity.WorkTypeId),
+        WorkHour: GlobalSetting.getUploadParameter(entity.WorkHour),
+        WorkContent: GlobalSetting.getUploadParameter(entity.WorkContent),
+        Remark: GlobalSetting.getUploadParameter(entity.Remark),
         userId: GlobalSetting.getUserId(),
         token: GlobalSetting.getUserToken()
       });

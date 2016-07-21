@@ -61,6 +61,7 @@ angular.module('starter.NativeUtilsService',
           },
           /**
            * 判断网络是否可用
+           * @param is 是否需要提示
            * @returns {boolean}
              */
           isOnline:function(is){

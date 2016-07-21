@@ -6,77 +6,152 @@ angular.module('starter.ResAttachmentController',[
     'starter.ResAttachmentService',
     'starter.commonutils',
     'starter.FileUtilsService',
-    'starter.globalservice'])
+    'starter.globalservice',
+    'starter.NativeUtilsService'])
 
   .controller('ResAttachmentCtrl', ['$scope',
     '$ionicModal',
+    '$ionicPopup',
+    '$ionicPlatform',
+    '$ionicHistory',
+    '$timeout',
     'ResAttachmentService',
     '$cordovaFile',
     '$cordovaFileTransfer',
     'CommonUtils',
     'FileUtils',
     'GlobalSetting',
-    function ($scope,$ionicModal,ResAttachmentService,$cordovaFile,$cordovaFileTransfer,
-              CommonUtils,FileUtils,GlobalSetting) {
+    'NativeUtils',
+    function ($scope,$ionicModal,$ionicPopup,$ionicPlatform,$ionicHistory,
+              $timeout,ResAttachmentService,
+              $cordovaFile,$cordovaFileTransfer,
+              CommonUtils,FileUtils,GlobalSetting,NativeUtils) {
+      // android 返回按钮
+      $ionicPlatform.onHardwareBackButton(function(){
+        if($scope.loadingDialog.isShow){
+          cancleDown();
+          $scope.loadingDialog.close();
+        }else{
+          $ionicHistory.goBack();
+        }
+      });
+
       $scope.mResAttachmentService = ResAttachmentService;
 
-      $scope.pro = "";
-
+      /**
+       * 点击附件列表的某行
+       * @param entity
+         */
       $scope.onItemClick = function(entity){
         //$scope.mResAttachmentService.mListCtrl.closeAttachments();
-        $scope.downloadImage();
+        $scope.downloadFile();
       };
 
-      //下载图片
-      $scope.downloadImage = function(){
+        /**
+         * 取消下载
+         */
+      $scope.cancleDown = function(){
+        if($scope.loadingDialog.isShow && $scope.FileTransfer){
+          $scope.FileTransfer.abort();
+        }
+        $scope.loadingDialog.close();
+      }
+
+      $scope.progressValue = 0;
+      $scope.loadingDialog = {
+        isShow:false,
+        myPopup:null,
+        show:function(){
+          if(!$scope.loadingDialog.isShow){
+            $scope.loadingDialog.myPopup = $ionicPopup.show({
+              title: '下载文件',
+              template: '<div><ion-spinner icon="android"></ion-spinner><div style="line-height: 28px;position: absolute;margin-left:6px;display: inline-block">下载中 {{progressValue}} %</div></div>',
+              scope: $scope,
+              buttons: [
+                { text: '取消',
+                  type: 'button-positive',
+                  onTap: function(e) {
+                    $scope.cancleDown();
+                  }
+                }
+              ]
+            });
+          }
+          $scope.loadingDialog.isShow = true;
+        },
+        close:function(){
+          $scope.loadingDialog.myPopup.close();
+          $scope.loadingDialog.isShow = false;
+        }
+      }
+
+
+      /**
+       * 下载图片
+       */
+      $scope.downloadFile = function(){
+        if(!NativeUtils.n.isOnline(true)){
+          return;
+        }
+
+        //小麦生产技术.mp4
+        var url2 = 'http://kingdonsoft.com/zsnd/upload/Media/2016/01/小麦生产技术.mp4';
+        var url = 'http://kingdonsoft.com/zsnd/Upload/Media/2016/05/e715508230334a1580d1b4287333c5f5.png';
         var savePath = GlobalSetting.getLocalCachePathWhole();
-        var url = 'http://www.hangge.com/blog/images/logo.png';
+        var filePathWhole = savePath + "/" + CommonUtils.getFileName(url)
+
+
+        // 下载进度
+        var onprogress = function(progressEvent) {
+          if (progressEvent.lengthComputable) {
+            var downloadProgress = (progressEvent.loaded / progressEvent.total) * 100;
+            var p = Math.floor(downloadProgress);
+            if($scope.progressValue != p){
+              $timeout(function(){
+                $scope.progressValue = p;
+              },0);
+            }
+          } else {
+          }
+        };
+
+        var doDown = function(){
+          $scope.loadingDialog.show();
+          $scope.FileTransfer = FileUtils.downFile(url,savePath,onprogress,
+            function(entry) {
+              $scope.loadingDialog.close();
+              FileUtils.openFile(filePathWhole);
+            },
+            function(error) {
+              console.log("download error source " + JSON.stringify(error));
+              $scope.loadingDialog.close();
+            });
+        };
 
         CommonUtils.checkDirIsExist(savePath,function(isOK){
           if(isOK){
-            CommonUtils.checkFileIsExist(savePath + "/" + CommonUtils.getFileName(url),function(resp){
-              if(resp){
+            CommonUtils.checkFileIsExist(filePathWhole,function(IsExist){
+              if(IsExist){
+                FileUtils.openFile(filePathWhole,function(){
+
+                });
               }else{
-                down();
+                doDown();
               }
             });
           }else{
+            FileUtils.recurCreateDirectory(GlobalSetting.getLocalPath(),
+              GlobalSetting.getLocalCachePath(),
+              function(ok){
+                if(ok){
+                  doDown();
+                }
+              },
+              function(eror){
 
+              });
           }
         });
-
-        function down(){
-          var ft = new FileTransfer();
-          var uri = encodeURI(url);
-          var pathUrl = savePath+"/"+FileUtils.getFileName(url);
-          console.log('开始下载'+pathUrl);
-
-          ft.onprogress = function(progressEvent) {
-            if (progressEvent.lengthComputable) {
-              $scope.pro = "进度是：" + progressEvent.loaded / progressEvent.total;
-            } else {
-            }
-          };
-          ft.download(
-            uri,
-            pathUrl,
-            function(entry) {
-              console.log("download complete: " + entry.toURL());
-            },
-            function(error) {
-              console.log("download error source " + error.source);
-              console.log("download error target " + error.target);
-              console.log("upload error code" + error.code);
-            },
-            false,
-            {
-              headers: {
-                "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-              }
-            }
-          );
-        }
-
       }
 
 

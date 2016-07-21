@@ -7,11 +7,12 @@
 
 .controller('ResCategoryCtrl', ['$scope',
   '$state',
+  '$ionicLoading',
   '$ionicPlatform',
   '$ionicHistory',
   'NativeUtils',
   'ResService',
-  function ($scope,$state,$ionicPlatform,$ionicHistory,NativeUtils,ResService) {
+  function ($scope,$state,$ionicLoading,$ionicPlatform,$ionicHistory,NativeUtils,ResService) {
 
     // android 返回按钮
     $ionicPlatform.onHardwareBackButton(function(){
@@ -34,6 +35,8 @@
     }
 
     $scope.mIsCate = true;
+
+
 
     $scope.ctrl = {
       // 数据集
@@ -129,7 +132,6 @@
       }
 
     }
-
 
     $scope.ctrl.init();
 }])
