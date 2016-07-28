@@ -21,6 +21,7 @@ angular.module('starter', ['ionic', 'ngCordova',
   'starter.FileUtilsService',
 
   'starter.MainController',
+  'starter.LoginController',
   'starter.UserInfoController',
   'starter.UserInfoService',
   'starter.WorklogController',
@@ -146,7 +147,7 @@ angular.module('starter', ['ionic', 'ngCordova',
         .state('login',{
           url: '/login',
           templateUrl: 'templates/login.html',
-          controller: 'UserInfoCtrl'
+          controller: 'LoginCtrl'
         })
 
         .state('main', {
@@ -165,6 +166,12 @@ angular.module('starter', ['ionic', 'ngCordova',
               controller: 'MainRightMenuCtrl'
             }
           }
+        })
+        .state('userinfo', {
+          url: '/userinfo',
+          cache: false,
+          templateUrl: 'templates/user/userInfo.html',
+          controller: 'UserInfoCtrl'
         })
 
         .state('worklog', {

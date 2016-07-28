@@ -1,61 +1,96 @@
 ﻿<ion-view>
-    <ion-content scroll="false">
-        <ion-side-menus >
-            <ion-side-menu-content class="setBG">
-                <ion-header-bar align-title="center" class="bar-positive">
-                    <h1 class="title">今点移动办公</h1>
-                  <img class="button button-icon icon btn_mine" src="img/head_people.png" ng-click="toggleRightMemu()" />
-                </ion-header-bar>
-                <div style="padding:8px;" class="has-header header-margin">
-                    <img src="img/oa_pic.jpg" style="width: 100%;" />
+  <ion-content scroll="false">
+    <ion-side-menus >
+      <ion-side-menu-content class="setBG">
+        <ion-header-bar align-title="center" class="bar-positive">
+            <h1 class="title">今点移动办公</h1>
+          <img class="button button-icon icon btn_mine" src="img/head_people.png" ng-click="toggleRightMemu()" />
+        </ion-header-bar>
+        <div class="has-header header-margin">
+          <ion-slide-box
+            does-continue="true"
+            slide-interval="1500"
+            auto-play="true"
+            >
+            <ion-slide>
+              <img src="img/oa_pic.jpg" style="width: 100%;" />
+            </ion-slide>
+            <ion-slide>
+              <img src="img/oa_pic.jpg" style="width: 100%;" />
+            </ion-slide>
+          </ion-slide-box>
 
-                    <table class="table_menu">
-                        <tr class="menu_row">
-                            <td class="menu_item1" ng-click="goWorklog()">
-                                <a class="layout_item">
-                                    <img src="img/icon_worklog.jpg" />
-                                    <span class="menu_item_text">工作日志</span>
-                                </a>
-                            </td>
-                            <td class="menu_item2" ng-click="goRes()">
-                                <a class="layout_item">
-                                    <img src="img/icon_resources.jpg" />
-                                    <span class="menu_item_text">信息资源</span>
-                                </a>
-                            </td>
-                        </tr>
+          <div style="padding:8px;">
+            <div class="row">
+              <div class="col col-50" ng-click="goWorklog()">
+                <img style="width: 98%;height: 100%;" src="img/icon_worklog.jpg" />
+                <span class="menu_item_text">工作日志</span>
+              </div>
+              <div class="col col-50" style="text-align: right" ng-click="goRes()">
+                <img style="width: 98%;height: 100%;" src="img/icon_resources.jpg" />
+                <span class="menu_item_text">信息资源</span>
+              </div>
+            </div>
 
-                        <tr class="menu_row">
-                            <td class="menu_item1">
-                                <a class="layout_item">
-                                    <img src="img/icon_contacts.jpg" style="margin-top: 5px"/>
-                                    <span class="menu_item_text">通讯录</span>
-                                </a>
-                            </td>
-                            <td class="menu_item2">
-                                <a class="layout_item">
-                                    <img src="img/icon_communicate.jpg" style="margin-top: 5px"/>
-                                    <span class="menu_item_text">内部交流</span>
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </ion-side-menu-content>
+            <div class="row" style="margin-top: 6%;">
+              <div class="col col-50" >
+                <img style="width: 98%;height: 100%;" src="img/icon_contacts.jpg" />
+                <span class="menu_item_text">通讯录</span>
+              </div>
+              <div class="col col-50" style="text-align: right">
+                <img style="width: 98%;height: 100%;" src="img/icon_communicate.jpg" />
+                <span class="menu_item_text">内部交流</span>
+              </div>
+            </div>
+          </div>
 
-            <!-- 右侧菜单 -->
-            <ion-side-menu side="right" name="menuContent">
-                <ion-view class="set_menu_BG">
-                    <ion-content scroll="false">
+        </div>
+    </ion-side-menu-content>
 
-                        <div class="menu-header">
-                            <img src="img/head.png" />
-                            <p style="margin-top:10px">lhou</p>
-                            <p>上海公司</p>
-                        </div>
-                    </ion-content>
-                </ion-view>
-            </ion-side-menu>
-        </ion-side-menus>
-    </ion-content>
+    <!-- 右侧菜单 -->
+    <ion-side-menu side="right" name="menuContent">
+        <ion-view class="set_menu_BG">
+          <ion-content scroll="false">
+            <div class="menu-header">
+                <img src="img/head.png" />
+                <p style="margin-top:10px">lhou</p>
+                <p>上海公司</p>
+            </div>
+
+            <div style="margin-left: 10px;margin-right: 10px;margin-top:30px;color: white;">
+              <div style="height: 1px;background-color: #666666;"></div>
+              <div class="menu-item item-icon-left item-icon-right" ng-click="menuCtrl.toggleInfoSetting();">
+                <img src="img/icon_people_small.png" class="menu-info icon" />
+                个人信息
+                <img ng-src="{{menuCtrl.infoSettintArrowSrc}}" class="menu-arrow icon" />
+              </div>
+              <div ng-show="menuCtrl.infoSettingShow">
+                <div class="menu-item-child" >修改资料</div>
+                <div class="menu-item-child" >修改密码</div>
+              </div>
+
+              <div style="height: 1px;background-color: #666666;"></div>
+              <div class="menu-item item-icon-left item-icon-right" ng-click="menuCtrl.toggleSetting();">
+                <img src="img/icon_setup.png" class="menu-info icon" />
+                系统设置
+                <img ng-src="{{menuCtrl.settingShowArrowSrc}}" class="menu-arrow icon" />
+              </div>
+              <div class="menu-item-child" ng-show="menuCtrl.settingShow">
+                <a style="float: right;font-size: 12px;">当前 V1.0.1</a>
+                <a >检查更新</a>
+              </div>
+
+              <div style="height: 1px;background-color: #666666;"></div>
+              <div class="menu-item item-icon-left" ng-click="logout();">
+                <img src="img/icon_log_out.png" class="menu-info icon" />
+                注销登录
+              </div>
+
+            </div>
+
+          </ion-content>
+        </ion-view>
+      </ion-side-menu>
+    </ion-side-menus>
+  </ion-content>
 </ion-view>

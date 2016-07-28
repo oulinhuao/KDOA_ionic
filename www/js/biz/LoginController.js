@@ -1,11 +1,11 @@
-angular.module('starter.UserInfoController', [
+angular.module('starter.LoginController', [
   'ngCordova',
   'starter.globalservice',
   'starter.UserInfoService',
   'starter.NativeUtilsService',
   'starter.FileUtilsService'])
 
-  .controller('UserInfoCtrl',['$scope',
+  .controller('LoginControllerCtrl',['$scope',
     '$state',
     'UserInfoService',
     'GlobalSetting',
