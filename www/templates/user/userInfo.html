@@ -6,9 +6,34 @@
     <h1 class="title">用户信息</h1>
   </ion-header-bar>
 
-  <ion-content>
+  <ion-content style="padding: 20px;background-color:#ececec;">
 
+    <div style="text-align: center;">
+      <img src="img/head.png" />
+    </div>
 
+    <div class="white-frame" style="margin-top: 10px;">
+      <div style="margin: 0 20px;">用户名&#12288;<span class="item-value">{{mUserInfo.USER_NAME}}</span></div>
+      <div style="border-bottom: solid 1px #ececec;margin-top: 10px;"></div>
+      <div style="margin: 10px 20px 10px 20px;">所属部门<span class="item-value">{{mUserInfo.DEPT_NAME}}</span></div>
+      <div style="border-bottom: solid 1px #ececec;margin-top: 10px;"></div>
+      <div style="margin: 10px 20px 10px 20px;">邮箱&#12288;&#12288;<span class="item-value">{{mUserInfo.EMAIL}}</span></div>
+    </div>
+
+    <div class="white-frame" style="margin-top: 10px;">
+      <label class="item item-input">
+        <span class="input-label">真实姓名</span>
+        <input type="text" value="{{mUserInfo.REAL_NAME}}">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">性别</span>
+        <input type="text" value="{{mUserInfo.SEX}}">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">联系电话</span>
+        <input type="text" value="{{mUserInfo.MOBILE_PHONE}}">
+      </label>
+    </div>
 
   </ion-content>
 

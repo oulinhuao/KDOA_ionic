@@ -22,11 +22,11 @@
 
           <div style="padding:8px;">
             <div class="row">
-              <div class="col col-50" ng-click="goWorklog()">
+              <div class="col col-50" ng-click="pageCtrl.goWorkLog()">
                 <img style="width: 98%;height: 100%;" src="img/icon_worklog.jpg" />
                 <span class="menu_item_text">工作日志</span>
               </div>
-              <div class="col col-50" style="text-align: right" ng-click="goRes()">
+              <div class="col col-50" style="text-align: right" ng-click="pageCtrl.goRes()">
                 <img style="width: 98%;height: 100%;" src="img/icon_resources.jpg" />
                 <span class="menu_item_text">信息资源</span>
               </div>
@@ -65,8 +65,8 @@
                 <img ng-src="{{menuCtrl.infoSettintArrowSrc}}" class="menu-arrow icon" />
               </div>
               <div ng-show="menuCtrl.infoSettingShow">
-                <div class="menu-item-child" >修改资料</div>
-                <div class="menu-item-child" >修改密码</div>
+                <div class="menu-item-child" ng-click="pageCtrl.goUserInfo();">修改资料</div>
+                <div class="menu-item-child" ng-click="pageCtrl.goModifyPswd();">修改密码</div>
               </div>
 
               <div style="height: 1px;background-color: #666666;"></div>

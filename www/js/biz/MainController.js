@@ -17,13 +17,23 @@
       $ionicSideMenuDelegate.toggleRight();
     };
 
-    $scope.goWorklog = function(){
-      $state.go('worklog');
-    }
-    $scope.goRes = function(){
-      $state.go('res_category');
-    }
     $scope.logout = function(){
+
+    }
+
+    $scope.pageCtrl = {
+      goWorkLog:function(){
+        $state.go('worklog');
+      },
+      goRes : function(){
+        $state.go('res_category');
+      },
+      goUserInfo:function(){
+        $state.go('userInfo');
+      },
+      goModifyPswd:function(){
+        $state.go('ModifyPswd');
+      }
 
     }
 

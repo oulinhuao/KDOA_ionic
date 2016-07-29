@@ -167,9 +167,12 @@ angular.module('starter', ['ionic', 'ngCordova',
             }
           }
         })
-        .state('userinfo', {
-          url: '/userinfo',
+        .state('userInfo', {
+          url: '/userInfo',
           cache: false,
+          params: {
+            'userInfo': null
+          },
           templateUrl: 'templates/user/userInfo.html',
           controller: 'UserInfoCtrl'
         })

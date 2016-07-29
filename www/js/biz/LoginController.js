@@ -5,7 +5,7 @@ angular.module('starter.LoginController', [
   'starter.NativeUtilsService',
   'starter.FileUtilsService'])
 
-  .controller('LoginControllerCtrl',['$scope',
+  .controller('LoginCtrl',['$scope',
     '$state',
     'UserInfoService',
     'GlobalSetting',
